@@ -1,0 +1,22 @@
+# Generated browser packages
+/dist/
+/releases/
+/safari-app/
+
+# Apple/Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Node and editor files
+node_modules/
+.DS_Store
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# Archived planning notes and old upgrade guides (kept locally, not in git)
+docs/old/

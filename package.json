@@ -1,0 +1,17 @@
+{
+  "name": "pin-copy",
+  "version": "0.8.0",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "validate": "node scripts/validate.mjs",
+    "build": "node scripts/build-browsers.mjs",
+    "package:all": "bash scripts/package-release.sh",
+    "clean": "bash scripts/clean.sh",
+    "ci": "npm run validate && npm test && npm run build"
+  },
+  "description": "Copy Pinterest images directly from the feed with a hover button.",
+  "engines": {
+    "node": ">=20"
+  }
+}
