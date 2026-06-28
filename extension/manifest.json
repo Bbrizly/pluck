@@ -1,0 +1,61 @@
+{
+  "manifest_version": 3,
+  "name": "Pin Copy",
+  "description": "Copy the Pinterest image under your pointer without opening the Pin.",
+  "version": "0.8.0",
+  "action": {
+    "default_title": "Pin Copy",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://*.pinterest.com/*",
+    "https://*.pinterest.ca/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.pinterest.com/*",
+        "https://*.pinterest.ca/*"
+      ],
+      "js": [
+        "page-clipboard.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://*.pinterest.com/*",
+        "https://*.pinterest.ca/*"
+      ],
+      "js": [
+        "shared.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "page-clipboard.js"
+      ],
+      "matches": [
+        "https://*.pinterest.com/*",
+        "https://*.pinterest.ca/*"
+      ]
+    }
+  ],
+  "optional_host_permissions": [
+    "https://i.pinimg.com/*"
+  ]
+}
