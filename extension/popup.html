@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pin Copy</title>
+  <style>
+    :root { color-scheme: light dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { width: 276px; margin: 0; padding: 16px; background: Canvas; color: CanvasText; }
+    h1 { margin: 0 0 4px; font-size: 16px; }
+    .intro { margin: 0 0 14px; font-size: 12px; opacity: 0.72; }
+    .setting { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 9px 0; font-size: 13px; font-weight: 600; }
+    .setting + .setting { border-top: 1px solid color-mix(in srgb, CanvasText 14%, transparent); }
+    input { width: 20px; height: 20px; flex: 0 0 auto; }
+    button { width:100%; margin-top:10px; padding:9px 10px; border:0; border-radius:8px; font:600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; cursor:pointer; }
+    button[hidden] { display:none; }
+    #status { margin-top: 10px; font-size: 11px; opacity: 0.72; }
+    .help { margin: 12px 0 0; padding: 10px; border-radius: 8px; background: color-mix(in srgb, CanvasText 7%, transparent); font-size: 11px; line-height: 1.4; }
+  </style>
+</head>
+<body>
+  <h1>Pin Copy</h1>
+  <p class="intro">Hover a Pinterest image, then click Copy.</p>
+
+  <label class="setting">
+    Enabled on Pinterest
+    <input id="enabled" type="checkbox" checked>
+  </label>
+
+  <label class="setting">
+    Show diagnostics
+    <input id="debugEnabled" type="checkbox">
+  </label>
+
+  <label class="setting">
+    Prefer higher-quality image first
+    <input id="highQualityEnabled" type="checkbox">
+  </label>
+
+  <div id="status" aria-live="polite"></div>
+  <p class="help"><strong>Recommended: leave higher-quality mode off.</strong> Normal mode uses the already-loaded image and falls back to a clean screen crop. Turning it on tries Pinterest’s CDN first, but it can never block the normal fallback.</p>
+  <script src="popup.js"></script>
+</body>
+</html>
