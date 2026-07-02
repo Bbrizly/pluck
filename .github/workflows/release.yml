@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Verify tag matches package version
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="v$(node -p "require('./package.json').version")"
+          actual="${GITHUB_REF_NAME}"
+          if [[ "$actual" != "$expected" ]]; then
+            echo "Tag $actual does not match package version $expected" >&2
+            exit 1
+          fi
+
+      - name: Run full CI
+        run: npm run ci
+
+      - name: Build browser archives
+        run: npm run package:all
+
+      - name: Generate checksums
+        run: sha256sum releases/*.zip > releases/SHA256SUMS.txt
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            releases/*.zip releases/SHA256SUMS.txt \
+            --verify-tag \
+            --generate-notes \
+            --title "Pin Copy $GITHUB_REF_NAME"

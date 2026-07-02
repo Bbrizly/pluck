@@ -1,0 +1,71 @@
+name: Bug report
+description: Report a reproducible Pin Copy problem
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Safari
+        - Chrome
+        - Edge
+        - Brave
+        - Opera
+        - Firefox
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Pin Copy, browser, and operating-system versions
+      placeholder: "Pin Copy 0.8.0, Safari 26.x, macOS 26.x"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Pinterest surface
+      options:
+        - Home feed
+        - Search results
+        - Board
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. Open... 2. Hover... 3. Click..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result and exact diagnostic error
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I disabled older local Pin Copy builds and reloaded Pinterest.
+        - label: I tested the raw clipboard image in Preview or an equivalent image viewer.
+        - label: I can reproduce the issue consistently.
