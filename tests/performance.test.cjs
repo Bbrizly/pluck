@@ -64,6 +64,6 @@ test("v0.8 roots do not use the legacy generic marker that old builds delete", (
   const diagnostics = functionBody("createDiagnosticsPanel");
   assert.doesNotMatch(overlay, /setAttribute\(UI_ROOT_ATTRIBUTE/);
   assert.doesNotMatch(diagnostics, /setAttribute\(UI_ROOT_ATTRIBUTE/);
-  assert.match(overlay, /data-pin-copy-ui-version/);
-  assert.match(diagnostics, /data-pin-copy-ui-version/);
+  assert.match(overlay, /data-pluck-ui-version/);
+  assert.match(diagnostics, /data-pluck-ui-version/);
 });

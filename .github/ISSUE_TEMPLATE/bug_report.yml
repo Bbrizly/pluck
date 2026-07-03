@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible Pin Copy problem
+description: Report a reproducible Pluck problem
 title: "bug: "
 labels: ["bug"]
 body:
@@ -22,8 +22,8 @@ body:
     id: versions
     attributes:
       label: Versions
-      description: Pin Copy, browser, and operating-system versions
-      placeholder: "Pin Copy 0.8.0, Safari 26.x, macOS 26.x"
+      description: Pluck, browser, and operating-system versions
+      placeholder: "Pluck 0.8.0, Safari 26.x, macOS 26.x"
     validations:
       required: true
 
@@ -66,6 +66,6 @@ body:
     attributes:
       label: Checks
       options:
-        - label: I disabled older local Pin Copy builds and reloaded Pinterest.
+        - label: I disabled older local Pluck builds and reloaded Pinterest.
         - label: I tested the raw clipboard image in Preview or an equivalent image viewer.
         - label: I can reproduce the issue consistently.

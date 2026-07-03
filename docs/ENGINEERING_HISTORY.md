@@ -1,6 +1,6 @@
 # Engineering History and Lessons
 
-Pin Copy became reliable through live Safari debugging. This document records why unusual code exists so future maintainers do not “simplify” it back into a broken version.
+Pluck became reliable through live Safari debugging. This document records why unusual code exists so future maintainers do not “simplify” it back into a broken version.
 
 ## Initial design
 
@@ -95,7 +95,7 @@ The screen fallback captured UI before repaint or captured UI from another insta
 
 Fix:
 
-- hide all known Pin Copy roots;
+- hide all known Pluck roots;
 - wait for rendering;
 - versioned roots and singleton guards;
 - continuously remove stale roots from older builds.
@@ -104,7 +104,7 @@ Lesson: local bundle IDs create independent extensions. A new build cannot remov
 
 ## Pinterest hover UI appeared in output
 
-Hiding Pin Copy UI was insufficient. Pinterest rendered its own dark scrim and Save controls when hovered.
+Hiding Pluck UI was insufficient. Pinterest rendered its own dark scrim and Save controls when hovered.
 
 Fix:
 

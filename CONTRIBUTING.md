@@ -1,6 +1,6 @@
 # Contributing
 
-Pin Copy is small, but the browser behavior is not simple. Changes must preserve the trusted-click sequence, security boundaries, and host-page performance.
+Pluck is small, but the browser behavior is not simple. Changes must preserve the trusted-click sequence, security boundaries, and host-page performance.
 
 ## Setup
 

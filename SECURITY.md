@@ -49,21 +49,21 @@ Image fetches:
 
 ### Clipboard hardening
 
-The MAIN-world bridge opens a clipboard request only after a trusted physical click inside an armed Pin Copy overlay.
+The MAIN-world bridge opens a clipboard request only after a trusted physical click inside an armed Pluck overlay.
 
 The page cannot cause arbitrary writes merely by posting a message; a matching pending request ID must already exist.
 
 ### No remote code
 
-Pin Copy does not download or execute remote JavaScript.
+Pluck does not download or execute remote JavaScript.
 
 ### No clipboard reading
 
-Pin Copy requests write behavior only and never reads the existing clipboard.
+Pluck requests write behavior only and never reads the existing clipboard.
 
 ## Threat model
 
-Pin Copy assumes the Pinterest page may inspect or interfere with MAIN-world code. Security therefore relies on:
+Pluck assumes the Pinterest page may inspect or interfere with MAIN-world code. Security therefore relies on:
 
 - exact message shapes;
 - trusted-click gating;

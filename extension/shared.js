@@ -1,16 +1,15 @@
-(function attachPinCopyShared(root, factory) {
+(function attachPluckShared(root, factory) {
   const api = factory();
   if (typeof module === "object" && module.exports) {
     module.exports = api;
   }
-  root.PinCopyShared = api;
-})(globalThis, function createPinCopyShared() {
+  root.PluckShared = api;
+})(globalThis, function createPluckShared() {
   "use strict";
 
   const FETCH_MESSAGE_TYPE = "FETCH_SELECTED_IMAGE";
   const CAPTURE_MESSAGE_TYPE = "CAPTURE_VISIBLE_PIN";
   const ALLOWED_IMAGE_HOSTS = Object.freeze(["i.pinimg.com"]);
-  const IMAGE_HOST_PERMISSION_ORIGINS = Object.freeze(["https://i.pinimg.com/*"]);
   const MAX_URL_LENGTH = 4096;
 
   function normalizeImageUrl(rawValue) {
@@ -120,7 +119,6 @@
     FETCH_MESSAGE_TYPE,
     CAPTURE_MESSAGE_TYPE,
     ALLOWED_IMAGE_HOSTS,
-    IMAGE_HOST_PERMISSION_ORIGINS,
     MAX_URL_LENGTH,
     normalizeImageUrl,
     parseSrcset,

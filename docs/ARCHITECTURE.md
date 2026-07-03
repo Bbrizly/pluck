@@ -1,10 +1,10 @@
 # Architecture
 
-This document explains the runtime architecture and the boundaries that must remain stable as Pin Copy evolves.
+This document explains the runtime architecture and the boundaries that must remain stable as Pluck evolves.
 
 ## Design goals
 
-Pin Copy has one job: copy one visible Pinterest still image after one explicit user click.
+Pluck has one job: copy one visible Pinterest still image after one explicit user click.
 
 The architecture is optimized for:
 
@@ -61,7 +61,7 @@ A normal extension content script runs in an isolated JavaScript world. It share
 
 Its only responsibility is to:
 
-1. observe the original physical click on the Pin Copy overlay;
+1. observe the original physical click on the Pluck overlay;
 2. create a promise for an `image/png` Blob;
 3. call `navigator.clipboard.write()` synchronously inside that click;
 4. wait for `content.js` to resolve or reject the Blob promise.
@@ -108,7 +108,7 @@ Draw the already-loaded <img> into canvas
 
 Sanitize visible Pinterest card
         │
-        ├─ hide Pin Copy UI
+        ├─ hide Pluck UI
         ├─ hide Pinterest controls and persistent overlays
         ├─ clear scrims and filters
         ├─ move real :hover state off the card

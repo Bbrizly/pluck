@@ -72,11 +72,11 @@ test("page bridge starts clipboard write directly from a trusted overlay click",
   vm.runInContext(source, context);
 
   const overlayHost = {
-    id: "pin-copy-v80-overlay-root",
-    matches(selector) { return selector.includes("data-pin-copy-overlay"); },
+    id: "pluck-v80-overlay-root",
+    matches(selector) { return selector.includes("data-pluck-overlay"); },
     getAttribute(name) {
-      if (name === "data-pin-copy-request-id") return "request-1";
-      if (name === "data-pin-copy-action") return "copy";
+      if (name === "data-pluck-request-id") return "request-1";
+      if (name === "data-pluck-action") return "copy";
       return null;
     }
   };
@@ -95,7 +95,7 @@ test("page bridge starts clipboard write directly from a trusted overlay click",
     type: "message",
     source: fakeWindow,
     data: {
-      source: "pin-copy-extension-clipboard",
+      source: "pluck-extension-clipboard",
       type: "resolve",
       requestId: "request-1",
       buffer: new Uint8Array([1, 2, 3]).buffer
@@ -103,8 +103,8 @@ test("page bridge starts clipboard write directly from a trusted overlay click",
   });
 
   await new Promise((resolve) => setImmediate(resolve));
-  assert.equal(attributes.get("data-pin-copy-result-id"), "request-1");
-  assert.equal(attributes.get("data-pin-copy-result-ok"), "true");
+  assert.equal(attributes.get("data-pluck-result-id"), "request-1");
+  assert.equal(attributes.get("data-pluck-result-ok"), "true");
 });
 
 test("page bridge ignores synthetic clicks", () => {
@@ -143,7 +143,7 @@ test("page bridge ignores synthetic clicks", () => {
     type: "click",
     isTrusted: false,
     target: null,
-    composedPath: () => [{ id: "pin-copy-v80-overlay-root", matches: () => true, getAttribute: () => "request-2" }]
+    composedPath: () => [{ id: "pluck-v80-overlay-root", matches: () => true, getAttribute: () => "request-2" }]
   });
   assert.equal(clipboardWriteCalls, 0);
 });
@@ -151,14 +151,14 @@ test("page bridge ignores synthetic clicks", () => {
 test("page bridge recognizes a trusted click by overlay coordinates when Safari hides shadow-path nodes", async () => {
   const listeners = new Map();
   const attributes = new Map([
-    ["data-pin-copy-request-id", "request-coordinate"],
-    ["data-pin-copy-action", "copy"]
+    ["data-pluck-request-id", "request-coordinate"],
+    ["data-pluck-action", "copy"]
   ]);
   let clipboardWriteCalls = 0;
 
   const overlayHost = {
-    id: "pin-copy-v80-overlay-root",
-    matches(selector) { return selector.includes("data-pin-copy-overlay"); },
+    id: "pluck-v80-overlay-root",
+    matches(selector) { return selector.includes("data-pluck-overlay"); },
     getAttribute(name) { return attributes.get(name) ?? null; },
     getBoundingClientRect() { return { left: 100, top: 100, right: 200, bottom: 150 }; }
   };
@@ -180,7 +180,7 @@ test("page bridge recognizes a trusted click by overlay coordinates when Safari 
     window: fakeWindow,
     document: {
       documentElement: root,
-      querySelector(selector) { return selector.includes("data-pin-copy-overlay") ? overlayHost : null; }
+      querySelector(selector) { return selector.includes("data-pluck-overlay") ? overlayHost : null; }
     },
     navigator: { clipboard: { write() { clipboardWriteCalls += 1; return Promise.resolve(); } } },
     ClipboardItem: class { constructor(data) { this.data = data; } },

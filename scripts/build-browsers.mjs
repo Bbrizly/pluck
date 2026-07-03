@@ -32,7 +32,7 @@ for (const [target, manifest] of Object.entries(targets)) {
   fs.writeFileSync(path.join(targetDir, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
   fs.writeFileSync(
     path.join(targetDir, "BUILD_TARGET.txt"),
-    `${target}\nGenerated from Pin Copy ${packageJson.version}.\nSee docs/BROWSER_PORTING.md before publishing.\n`
+    `${target}\nGenerated from Pluck ${packageJson.version}.\nSee docs/BROWSER_PORTING.md before publishing.\n`
   );
 }
 
@@ -49,14 +49,17 @@ function createFirefoxManifest(base) {
     service_worker: "background.js"
   };
 
-  const extensionId = process.env.FIREFOX_EXTENSION_ID?.trim();
-  if (extensionId) {
-    manifest.browser_specific_settings = {
-      gecko: {
-        id: extensionId
-      }
-    };
-  }
+  // Firefox MV3 requires a gecko id to lint/sign. Use the release secret when
+  // present (must match the AMO listing), else a stable local id so the default
+  // build passes `web-ext lint` and side-loads cleanly.
+  const extensionId = process.env.FIREFOX_EXTENSION_ID?.trim() || "pluck@extension";
+  manifest.browser_specific_settings = {
+    gecko: {
+      id: extensionId,
+      // Pluck collects no user data (see PRIVACY.md); AMO now wants this stated.
+      data_collection_permissions: { required: ["none"] }
+    }
+  };
 
   return manifest;
 }

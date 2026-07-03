@@ -2,14 +2,14 @@
   "use strict";
 
   const CONTENT_VERSION = "0.8.0";
-  const CONTENT_VERSION_ATTRIBUTE = "data-pin-copy-content-version";
-  const UI_OWNER_ATTRIBUTE = "data-pin-copy-ui-owner";
-  const UI_ROOT_ATTRIBUTE = "data-pin-copy-ui-root";
-  const OVERLAY_ROOT_ID = "pin-copy-v80-overlay-root";
-  const DIAGNOSTICS_ROOT_ID = "pin-copy-v80-diagnostics-root";
-  const LEGACY_UI_ROOT_IDS = Object.freeze(["pin-copy-extension-root", "pin-copy-diagnostics-root"]);
+  const CONTENT_VERSION_ATTRIBUTE = "data-pluck-content-version";
+  const UI_OWNER_ATTRIBUTE = "data-pluck-ui-owner";
+  const UI_ROOT_ATTRIBUTE = "data-pluck-ui-root";
+  const OVERLAY_ROOT_ID = "pluck-v80-overlay-root";
+  const DIAGNOSTICS_ROOT_ID = "pluck-v80-diagnostics-root";
+  const LEGACY_UI_ROOT_IDS = Object.freeze(["pluck-extension-root", "pluck-diagnostics-root"]);
   const UI_ROOT_SELECTOR = `[${UI_ROOT_ATTRIBUTE}], #${OVERLAY_ROOT_ID}, #${DIAGNOSTICS_ROOT_ID}, #${LEGACY_UI_ROOT_IDS[0]}, #${LEGACY_UI_ROOT_IDS[1]}`;
-  const ownerToken = globalThis.crypto?.randomUUID?.() || `pin-copy-owner-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  const ownerToken = globalThis.crypto?.randomUUID?.() || `pluck-owner-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
   // v0.8.0 uses versioned root IDs so an older local build cannot delete the new
   // UI with its own stale MutationObserver. The new controller continuously
@@ -20,10 +20,10 @@
     return;
   }
   documentRoot?.setAttribute(CONTENT_VERSION_ATTRIBUTE, CONTENT_VERSION);
-  removeExistingPinCopyUi();
+  removeExistingPluckUi();
 
   const extensionApi = globalThis.browser ?? globalThis.chrome;
-  const Shared = globalThis.PinCopyShared;
+  const Shared = globalThis.PluckShared;
 
   const MIN_IMAGE_SIZE = 120;
   const MAX_PIXEL_COUNT = 60_000_000;
@@ -37,16 +37,16 @@
     '[data-test-id*="last-visited" i]',
     '[aria-label="Last visited"]'
   ].join(", ");
-  const PAGE_CLIPBOARD_RESULT_EVENT = "pin-copy:clipboard-result";
-  const PAGE_CLIPBOARD_READY_EVENT = "pin-copy:clipboard-bridge-ready";
-  const PAGE_CLIPBOARD_PROBE_EVENT = "pin-copy:clipboard-bridge-probe";
-  const PAGE_CLIPBOARD_CHANNEL = "pin-copy-extension-clipboard";
-  const INIT_BRIDGE_MESSAGE_TYPE = "PIN_COPY_INIT_PAGE_BRIDGE";
-  const PAGE_REQUEST_ID_ATTRIBUTE = "data-pin-copy-request-id";
-  const PAGE_RESULT_ID_ATTRIBUTE = "data-pin-copy-result-id";
-  const PAGE_RESULT_OK_ATTRIBUTE = "data-pin-copy-result-ok";
-  const PAGE_RESULT_ERROR_ATTRIBUTE = "data-pin-copy-result-error";
-  const COPY_ACTION_ATTRIBUTE = "data-pin-copy-action";
+  const PAGE_CLIPBOARD_RESULT_EVENT = "pluck:clipboard-result";
+  const PAGE_CLIPBOARD_READY_EVENT = "pluck:clipboard-bridge-ready";
+  const PAGE_CLIPBOARD_PROBE_EVENT = "pluck:clipboard-bridge-probe";
+  const PAGE_CLIPBOARD_CHANNEL = "pluck-extension-clipboard";
+  const INIT_BRIDGE_MESSAGE_TYPE = "PLUCK_INIT_PAGE_BRIDGE";
+  const PAGE_REQUEST_ID_ATTRIBUTE = "data-pluck-request-id";
+  const PAGE_RESULT_ID_ATTRIBUTE = "data-pluck-result-id";
+  const PAGE_RESULT_OK_ATTRIBUTE = "data-pluck-result-ok";
+  const PAGE_RESULT_ERROR_ATTRIBUTE = "data-pluck-result-error";
+  const COPY_ACTION_ATTRIBUTE = "data-pluck-action";
 
   let enabled = true;
   let debugEnabled = false;
@@ -72,7 +72,7 @@
   window.addEventListener(PAGE_CLIPBOARD_RESULT_EVENT, onPageClipboardResult, true);
   void initialize();
 
-  function removeExistingPinCopyUi() {
+  function removeExistingPluckUi() {
     for (const node of document.querySelectorAll(UI_ROOT_SELECTOR)) {
       node.remove();
     }
@@ -94,7 +94,7 @@
       return 1;
     };
 
-    // Pin Copy roots are direct children of <html>. Observe only direct child
+    // Pluck roots are direct children of <html>. Observe only direct child
     // insertions instead of Pinterest's entire, constantly changing subtree.
     // v0.7.1 watched every DOM mutation and ran document-wide selectors, which
     // made infinite-feed scrolling noticeably slower.
@@ -109,7 +109,7 @@
       if (removed > 0) {
         updateDiagnostics(
           { instances: `1 active; removed ${removed} stale root${removed === 1 ? "" : "s"}` },
-          `Removed ${removed} stale Pin Copy UI root${removed === 1 ? "" : "s"}`
+          `Removed ${removed} stale Pluck UI root${removed === 1 ? "" : "s"}`
         );
       }
     });
@@ -132,7 +132,7 @@
 
     const probe = () => {
       window.dispatchEvent(new Event(PAGE_CLIPBOARD_PROBE_EVENT));
-      const marker = document.documentElement?.getAttribute("data-pin-copy-bridge") || "";
+      const marker = document.documentElement?.getAttribute("data-pluck-bridge") || "";
       if (marker.startsWith("ready")) {
         markReady();
       }
@@ -180,7 +180,7 @@
 
       const script = document.createElement("script");
       script.src = extensionApi.runtime.getURL("page-clipboard.js");
-      script.dataset.pinCopyBridge = "fallback";
+      script.dataset.pluckBridge = "fallback";
       script.addEventListener("load", () => {
         script.remove();
         probe();
@@ -272,8 +272,8 @@
     const host = document.createElement("div");
     host.id = OVERLAY_ROOT_ID;
     host.setAttribute(UI_OWNER_ATTRIBUTE, ownerToken);
-    host.setAttribute("data-pin-copy-ui-version", CONTENT_VERSION);
-    host.setAttribute("data-pin-copy-overlay", "true");
+    host.setAttribute("data-pluck-ui-version", CONTENT_VERSION);
+    host.setAttribute("data-pluck-overlay", "true");
     host.style.position = "fixed";
     host.style.left = "0";
     host.style.top = "0";
@@ -339,7 +339,7 @@
     const host = document.createElement("div");
     host.id = DIAGNOSTICS_ROOT_ID;
     host.setAttribute(UI_OWNER_ATTRIBUTE, ownerToken);
-    host.setAttribute("data-pin-copy-ui-version", CONTENT_VERSION);
+    host.setAttribute("data-pluck-ui-version", CONTENT_VERSION);
     host.style.position = "fixed";
     host.style.top = "12px";
     host.style.right = "12px";
@@ -371,7 +371,7 @@
         .event { margin-top:9px; padding-top:8px; border-top:1px solid rgba(255,255,255,.12); color:#fde68a; }
       </style>
       <div class="panel">
-        <div class="title"><span class="dot"></span><span>Pin Copy diagnostics v0.8.0</span></div>
+        <div class="title"><span class="dot"></span><span>Pluck diagnostics v0.8.0</span></div>
         <div class="grid">
           <span class="key">Script</span><span class="value" data-field="script">Starting…</span>
           <span class="key">Instances</span><span class="value" data-field="instances">Checking…</span>
@@ -430,7 +430,7 @@
       if (diagnostics.fields.event.textContent !== eventMessage) {
         diagnostics.fields.event.textContent = eventMessage;
       }
-      console.info(`[Pin Copy] ${eventMessage}`);
+      console.info(`[Pluck] ${eventMessage}`);
     }
   }
 
@@ -784,7 +784,7 @@
       const message = error instanceof Error ? error.message : String(error);
       updateDiagnostics({ copy: `Failed: ${message}` }, `Copy failed: ${message}`);
       if (debugEnabled) {
-        console.error("[Pin Copy] Copy failed", error);
+        console.error("[Pluck] Copy failed", error);
       }
     }
   }
@@ -794,7 +794,7 @@
       disarmClipboardRequest();
       return null;
     }
-    const requestId = globalThis.crypto?.randomUUID?.() || `pin-copy-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const requestId = globalThis.crypto?.randomUUID?.() || `pluck-${Date.now()}-${Math.random().toString(16).slice(2)}`;
     overlay.host.setAttribute(PAGE_REQUEST_ID_ATTRIBUTE, requestId);
     overlay.host.setAttribute(COPY_ACTION_ATTRIBUTE, "copy");
     return requestId;
@@ -938,7 +938,7 @@
     }
 
     updateDiagnostics({ copy: `Higher-quality image fetched (${response.mimeType})` });
-    const buffer = normalizeMessageBuffer(response.buffer) || decodeBase64Buffer(response.bytesBase64);
+    const buffer = decodeBase64Buffer(response.bytesBase64);
     if (!buffer || buffer.byteLength === 0) {
       throw new Error("IMAGE_BYTES_MISSING");
     }
@@ -1142,8 +1142,8 @@
       if (!(pathNode?.nodeType === Node.ELEMENT_NODE)) {
         continue;
       }
-      pathNode.setAttribute("data-pin-copy-capture-path", "true");
-      captureAttributes.push([pathNode, "data-pin-copy-capture-path"]);
+      pathNode.setAttribute("data-pluck-capture-path", "true");
+      captureAttributes.push([pathNode, "data-pluck-capture-path"]);
       rememberStyle(pathNode);
       pathNode.style.setProperty("opacity", "1", "important");
       pathNode.style.setProperty("filter", "none", "important");
@@ -1156,8 +1156,8 @@
       }
     }
 
-    image.setAttribute("data-pin-copy-capture-image", "true");
-    captureAttributes.push([image, "data-pin-copy-capture-image"]);
+    image.setAttribute("data-pluck-capture-image", "true");
+    captureAttributes.push([image, "data-pluck-capture-image"]);
     rememberStyle(image);
     image.style.setProperty("opacity", "1", "important");
     image.style.setProperty("filter", "none", "important");
@@ -1177,17 +1177,17 @@
     for (const persistentOverlay of persistentOverlays) {
       if (persistentOverlay !== image
           && !persistentOverlay.contains(image)
-          && rectanglesOverlap(imageRectForCapture(image), persistentOverlay.getBoundingClientRect())) {
+          && rectanglesOverlap(image.getBoundingClientRect(), persistentOverlay.getBoundingClientRect())) {
         hideNode(persistentOverlay);
-        persistentOverlay.setAttribute("data-pin-copy-persistent-overlay", "true");
-        captureAttributes.push([persistentOverlay, "data-pin-copy-persistent-overlay"]);
+        persistentOverlay.setAttribute("data-pluck-persistent-overlay", "true");
+        captureAttributes.push([persistentOverlay, "data-pluck-persistent-overlay"]);
         persistentOverlayCount += 1;
       }
     }
 
     // Catch portal-mounted or absolutely positioned controls that overlap the
     // image but are not in its normal ancestor tree.
-    const imageRect = imageRectForCapture(image);
+    const imageRect = image.getBoundingClientRect();
     for (const point of captureSamplePoints(imageRect)) {
       for (const element of document.elementsFromPoint(point.x, point.y)) {
         if (!(element?.nodeType === Node.ELEMENT_NODE)
@@ -1197,7 +1197,7 @@
             || element === document.documentElement
             || element === document.body
             || element.matches(UI_ROOT_SELECTOR)
-            || element.hasAttribute("data-pin-copy-capture-shield")) {
+            || element.hasAttribute("data-pluck-capture-shield")) {
           continue;
         }
 
@@ -1217,10 +1217,10 @@
     }
 
     const captureStyle = document.createElement("style");
-    captureStyle.id = "pin-copy-v80-capture-sanitizer";
+    captureStyle.id = "pluck-v80-capture-sanitizer";
     captureStyle.textContent = `
-      [data-pin-copy-capture-path]::before,
-      [data-pin-copy-capture-path]::after {
+      [data-pluck-capture-path]::before,
+      [data-pluck-capture-path]::after {
         content: none !important;
         display: none !important;
         opacity: 0 !important;
@@ -1229,13 +1229,13 @@
         box-shadow: none !important;
         filter: none !important;
       }
-      [data-pin-copy-capture-path],
-      [data-pin-copy-capture-image] {
+      [data-pluck-capture-path],
+      [data-pluck-capture-image] {
         opacity: 1 !important;
         filter: none !important;
       }
       ${PINTEREST_PERSISTENT_IMAGE_OVERLAY_SELECTOR},
-      [data-pin-copy-persistent-overlay="true"] {
+      [data-pluck-persistent-overlay="true"] {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
@@ -1254,7 +1254,7 @@
     // off the Pinterest card. It is invisible in the screenshot but forces
     // Pinterest's hover-only controls and scrim to begin fading out.
     const shield = document.createElement("div");
-    shield.setAttribute("data-pin-copy-capture-shield", "true");
+    shield.setAttribute("data-pluck-capture-shield", "true");
     shield.style.cssText = [
       "position:fixed",
       "inset:0",
@@ -1275,7 +1275,7 @@
           }
           const style = getComputedStyle(node);
           const rect = node.getBoundingClientRect();
-          return rectanglesOverlap(imageRectForCapture(image), rect)
+          return rectanglesOverlap(image.getBoundingClientRect(), rect)
             && style.display !== "none"
             && style.visibility !== "hidden"
             && Number(style.opacity || 1) > 0;
@@ -1298,18 +1298,6 @@
           }
         }
       }
-    };
-  }
-
-  function imageRectForCapture(image) {
-    const rect = image.getBoundingClientRect();
-    return {
-      left: rect.left,
-      top: rect.top,
-      right: rect.right,
-      bottom: rect.bottom,
-      width: rect.width,
-      height: rect.height
     };
   }
 
@@ -1341,13 +1329,15 @@
     });
   }
 
-  function loadDataUrlImage(dataUrl) {
-    return new Promise((resolve, reject) => {
-      const image = new Image();
-      image.onload = () => resolve(image);
-      image.onerror = () => reject(new Error("CAPTURE_IMAGE_DECODING_FAILED"));
-      image.src = dataUrl;
-    });
+  async function loadDataUrlImage(dataUrl) {
+    const image = new Image();
+    image.src = dataUrl;
+    try {
+      await image.decode();
+    } catch {
+      throw new Error("CAPTURE_IMAGE_DECODING_FAILED");
+    }
+    return image;
   }
 
   function canvasToPngBlob(canvas, errorCode = "PNG_ENCODING_FAILED") {
@@ -1356,22 +1346,6 @@
         blob ? resolve(blob) : reject(new Error(errorCode));
       }, "image/png");
     });
-  }
-
-  function normalizeMessageBuffer(value) {
-    if (value instanceof ArrayBuffer) {
-      return value;
-    }
-    if (ArrayBuffer.isView(value)) {
-      return value.buffer.slice(value.byteOffset, value.byteOffset + value.byteLength);
-    }
-    if (Array.isArray(value) && value.every((entry) => Number.isInteger(entry) && entry >= 0 && entry <= 255)) {
-      return Uint8Array.from(value).buffer;
-    }
-    if (Array.isArray(value?.data)) {
-      return Uint8Array.from(value.data).buffer;
-    }
-    return null;
   }
 
   function decodeBase64Buffer(value) {
@@ -1433,23 +1407,22 @@
     }
   }
 
-  function loadImageElement(blob) {
-    return new Promise((resolve, reject) => {
-      const objectUrl = URL.createObjectURL(blob);
-      const image = new Image();
-      image.decoding = "async";
-      image.onload = () => resolve({
-        width: image.naturalWidth,
-        height: image.naturalHeight,
-        drawSource: image,
-        cleanup: () => URL.revokeObjectURL(objectUrl)
-      });
-      image.onerror = () => {
-        URL.revokeObjectURL(objectUrl);
-        reject(new Error("IMAGE_DECODING_FAILED"));
-      };
-      image.src = objectUrl;
-    });
+  async function loadImageElement(blob) {
+    const objectUrl = URL.createObjectURL(blob);
+    const image = new Image();
+    image.src = objectUrl;
+    try {
+      await image.decode();
+    } catch {
+      URL.revokeObjectURL(objectUrl);
+      throw new Error("IMAGE_DECODING_FAILED");
+    }
+    return {
+      width: image.naturalWidth,
+      height: image.naturalHeight,
+      drawSource: image,
+      cleanup: () => URL.revokeObjectURL(objectUrl)
+    };
   }
 
   function setButtonState(label, disabled) {

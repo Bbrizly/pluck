@@ -15,7 +15,7 @@ const packageJson = readJson(path.join(root, "package.json"));
 const manifest = readJson(path.join(extensionDir, "manifest.json"));
 
 assert(packageJson.version === manifest.version, "package.json and manifest.json versions must match");
-assert(manifest.manifest_version === 3, "Pin Copy must remain Manifest V3");
+assert(manifest.manifest_version === 3, "Pluck must remain Manifest V3");
 assert(!JSON.stringify(manifest).includes("<all_urls>"), "Broad <all_urls> access is forbidden");
 assert(
   manifest.optional_host_permissions?.length === 1
@@ -48,7 +48,8 @@ const requiredDocs = [
   "docs/BROWSER_PORTING.md",
   "docs/CI_CD.md",
   "docs/RELEASE_CHECKLIST.md",
-  "docs/SAFARI_INSTALLATION.md"
+  "docs/SAFARI_INSTALLATION.md",
+  "docs/STORE_PUBLISHING.md"
 ];
 for (const relativePath of requiredDocs) {
   assert(fs.existsSync(path.join(root, relativePath)), `Missing required file: ${relativePath}`);

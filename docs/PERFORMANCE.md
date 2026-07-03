@@ -2,7 +2,7 @@
 
 Pinterest is a worst-case environment for a careless DOM extension: an infinite masonry feed, image lazy-loading, virtualized cards, transforms, hover controls, and constant DOM mutation.
 
-Pin Copy must be invisible to scrolling performance when idle.
+Pluck must be invisible to scrolling performance when idle.
 
 ## Performance budget
 
@@ -45,7 +45,7 @@ It does not reposition the overlay while the page is moving.
 
 ## DOM mutation
 
-The duplicate-build guard observes only direct `<html>` child additions because Pin Copy's own roots are direct children of `<html>`.
+The duplicate-build guard observes only direct `<html>` child additions because Pluck's own roots are direct children of `<html>`.
 
 Never restore:
 
@@ -104,9 +104,9 @@ In Safari Web Inspector:
 
 Compare:
 
-- Pin Copy disabled;
-- Pin Copy enabled, diagnostics off;
-- Pin Copy enabled, diagnostics on.
+- Pluck disabled;
+- Pluck enabled, diagnostics off;
+- Pluck enabled, diagnostics on.
 
 A meaningful regression is one that is visible in both the trace and the scrolling experience.
 

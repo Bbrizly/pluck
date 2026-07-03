@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Pin Copy",
+  "name": "Pluck",
   "description": "Copy the Pinterest image under your pointer without opening the Pin.",
   "version": "0.8.0",
   "action": {
-    "default_title": "Pin Copy",
+    "default_title": "Pluck",
     "default_popup": "popup.html"
   },
   "background": {

@@ -1,6 +1,6 @@
 # Debugging Guide
 
-Pin Copy has a staged pipeline. Debug the first stage that fails; do not randomly alter permissions, clipboard code, and DOM selectors at the same time.
+Pluck has a staged pipeline. Debug the first stage that fails; do not randomly alter permissions, clipboard code, and DOM selectors at the same time.
 
 ## Stage map
 
@@ -43,7 +43,7 @@ Likely causes:
 
 Actions:
 
-1. disable every old Pin Copy extension;
+1. disable every old Pluck extension;
 2. quit Safari;
 3. reopen Safari;
 4. enable one build;
@@ -70,7 +70,7 @@ The MAIN-world bridge did not initialize in the current tab.
 Reload after enabling the current build. Inspect:
 
 ```js
-document.documentElement.getAttribute("data-pin-copy-bridge")
+document.documentElement.getAttribute("data-pluck-bridge")
 ```
 
 Expected value starts with:
@@ -118,7 +118,7 @@ Use Preview → File → New from Clipboard to inspect the exact clipboard image
 
 Identify whether the contamination is:
 
-- Pin Copy UI;
+- Pluck UI;
 - Pinterest hover UI;
 - persistent Pinterest UI such as **Last visited**;
 - a CSS pseudo-element scrim;
@@ -145,8 +145,8 @@ In the page console:
 
 ```js
 [...document.querySelectorAll(
-  '[data-pin-copy-ui-root], [data-pin-copy-ui-version], #pin-copy-extension-root, #pin-copy-diagnostics-root'
-)].map((node) => ({ id: node.id, version: node.getAttribute('data-pin-copy-ui-version') }));
+  '[data-pluck-ui-root], [data-pluck-ui-version], #pluck-extension-root, #pluck-diagnostics-root'
+)].map((node) => ({ id: node.id, version: node.getAttribute('data-pluck-ui-version') }));
 ```
 
 Disable old builds and reload the page.
@@ -157,7 +157,7 @@ After a copy attempt:
 
 ```js
 document.querySelectorAll(
-  '[data-pin-copy-capture-shield], [data-pin-copy-capture-path], [data-pin-copy-capture-image], #pin-copy-v80-capture-sanitizer'
+  '[data-pluck-capture-shield], [data-pluck-capture-path], [data-pluck-capture-image], #pluck-v80-capture-sanitizer'
 ).length
 ```
 
@@ -183,12 +183,12 @@ Do not log image bytes or user data.
 
 - browser and version;
 - macOS/OS version;
-- Pin Copy version;
+- Pluck version;
 - Pinterest URL surface: Home, search, or board;
 - higher-quality setting;
 - diagnostics screenshot;
 - exact error code;
 - raw clipboard screenshot from Preview;
-- whether old Pin Copy versions were disabled;
+- whether old Pluck versions were disabled;
 - reproducible Pin DOM excerpt when an overlay is involved;
 - performance Timeline when the issue is scrolling.

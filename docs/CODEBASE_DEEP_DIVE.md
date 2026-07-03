@@ -1,13 +1,13 @@
 # Codebase Deep Dive
 
-This is the detailed maintainer guide for Pin Copy. It explains what each file does, why the unusual pieces exist, how data moves through the extension, and where changes are most likely to break working behavior.
+This is the detailed maintainer guide for Pluck. It explains what each file does, why the unusual pieces exist, how data moves through the extension, and where changes are most likely to break working behavior.
 
 ## Start with the mental model
 
-Pin Copy is not “a button that downloads an image.” It coordinates four browser security contexts:
+Pluck is not “a button that downloads an image.” It coordinates four browser security contexts:
 
 1. **Pinterest DOM** — where images and overlays exist.
-2. **Extension content-script world** — where Pin Copy can safely inspect and modify the DOM.
+2. **Extension content-script world** — where Pluck can safely inspect and modify the DOM.
 3. **Pinterest MAIN JavaScript world** — where Safari accepts the original trusted click for clipboard access.
 4. **Extension background context** — where privileged cross-origin image fetch and visible-tab capture happen.
 
@@ -92,13 +92,13 @@ This order is deliberate. The MAIN-world click listener should already exist bef
 It uses a small UMD-style wrapper:
 
 ```js
-(function attachPinCopyShared(root, factory) {
+(function attachPluckShared(root, factory) {
   const api = factory();
   if (typeof module === "object" && module.exports) {
     module.exports = api;
   }
-  root.PinCopyShared = api;
-})(globalThis, function createPinCopyShared() {
+  root.PluckShared = api;
+})(globalThis, function createPluckShared() {
   // ...
 });
 ```
@@ -183,7 +183,7 @@ The background file owns privileged browser operations.
 At startup it loads shared validation when running as a service worker:
 
 ```js
-if (typeof importScripts === "function" && !globalThis.PinCopyShared) {
+if (typeof importScripts === "function" && !globalThis.PluckShared) {
   importScripts("shared.js");
 }
 ```
@@ -270,8 +270,8 @@ window.addEventListener("click", handler, true);
 It requires:
 
 - `event.isTrusted === true`;
-- a click inside the visible Pin Copy overlay;
-- the overlay to be armed with `data-pin-copy-action="copy"`;
+- a click inside the visible Pluck overlay;
+- the overlay to be armed with `data-pluck-action="copy"`;
 - a unique request ID.
 
 ### Promise-backed clipboard item
@@ -313,15 +313,15 @@ It is large because it contains the exact timing and recovery behavior proven du
 The versioned root IDs prevent old local builds from fighting with the current UI:
 
 ```text
-pin-copy-v80-overlay-root
-pin-copy-v80-diagnostics-root
+pluck-v80-overlay-root
+pluck-v80-diagnostics-root
 ```
 
 The page root stores the content-script version. If the same version is already active with a valid overlay, a duplicate instance exits.
 
-`removeExistingPinCopyUi()` clears known stale roots at startup.
+`removeExistingPluckUi()` clears known stale roots at startup.
 
-`startUiDeduplicationGuard()` observes only direct children of `<html>`. Pin Copy roots are inserted there, so there is no reason to watch Pinterest's full dynamic subtree.
+`startUiDeduplicationGuard()` observes only direct children of `<html>`. Pluck roots are inserted there, so there is no reason to watch Pinterest's full dynamic subtree.
 
 This was a major performance fix. A previous full-subtree observer made scrolling sluggish.
 
@@ -441,7 +441,7 @@ This is the most complicated fallback because it must capture the visual page wi
 
 The sanitizer:
 
-- hides all Pin Copy UI roots;
+- hides all Pluck UI roots;
 - identifies the outer Pin card and image path;
 - marks path nodes so pseudo-elements can be disabled;
 - hides Pinterest buttons, menus, and overlay-positioned siblings over the image;

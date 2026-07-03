@@ -26,7 +26,7 @@ Use a stable local bundle identifier you control:
 
 ```bash
 chmod +x scripts/package-safari.sh
-BUNDLE_ID="com.yourname.pincopy.dev" ./scripts/package-safari.sh
+BUNDLE_ID="com.yourname.pluck.dev" ./scripts/package-safari.sh
 ```
 
 The script:
@@ -39,7 +39,7 @@ The script:
 For non-interactive use:
 
 ```bash
-NO_OPEN=1 BUNDLE_ID="com.yourname.pincopy.dev" ./scripts/package-safari.sh
+NO_OPEN=1 BUNDLE_ID="com.yourname.pluck.dev" ./scripts/package-safari.sh
 ```
 
 ## 3. Configure Xcode
@@ -56,7 +56,7 @@ When local signing is unavailable, add your Apple Account in Xcode and use your 
 Select:
 
 ```text
-Scheme: Pin Copy
+Scheme: Pluck
 Destination: My Mac
 ```
 
@@ -72,7 +72,7 @@ Safari → Settings → Advanced → Show features for web developers
 
 For unsigned local builds, enable **Allow Unsigned Extensions** in Safari's developer settings/menu when your Safari version exposes it.
 
-## 5. Enable Pin Copy
+## 5. Enable Pluck
 
 Open:
 
@@ -80,9 +80,9 @@ Open:
 Safari → Settings → Extensions
 ```
 
-Enable the new Pin Copy extension and allow access to Pinterest.
+Enable the new Pluck extension and allow access to Pinterest.
 
-Disable every older local Pin Copy build. Multiple local bundle IDs can leave multiple content scripts running and produce duplicate buttons, diagnostics, or performance regressions.
+Disable every older local Pluck build. Multiple local bundle IDs can leave multiple content scripts running and produce duplicate buttons, diagnostics, or performance regressions.
 
 Quit and reopen Safari after removing old builds, then reload Pinterest.
 
@@ -121,7 +121,7 @@ Enable **Show diagnostics** temporarily.
 The panel should show:
 
 ```text
-Pin Copy diagnostics v0.8.0
+Pluck diagnostics v0.8.0
 Instances  1 active controller
 ```
 
@@ -142,7 +142,7 @@ Turn diagnostics off for normal performance testing.
 
 ## Xcode says “No space left on device”
 
-This is not a Pin Copy source error. Clear generated Xcode and simulator data after closing Xcode and Simulator:
+This is not a Pluck source error. Clear generated Xcode and simulator data after closing Xcode and Simulator:
 
 ```bash
 rm -rf ~/Library/Developer/Xcode/DerivedData/*
@@ -162,12 +162,12 @@ Do not delete simulator data you need without understanding the impact.
 
 Check:
 
-- only one Pin Copy build is enabled;
+- only one Pluck build is enabled;
 - Pinterest access is allowed;
 - you are on Home, search, or a board;
 - the target is a still image, not video;
 - the image is at least 120 px in both rendered dimensions;
-- Pin Copy is enabled in its popup;
+- Pluck is enabled in its popup;
 - the Pinterest tab was reloaded after enabling the extension.
 
 Enable diagnostics to see the rejection reason.
@@ -200,7 +200,7 @@ Do not add generated Pinterest class names as the only selector.
 
 Disable diagnostics and every older extension build, quit Safari, reopen it, and reload the page.
 
-A content script from an older enabled extension continues running even if its visible UI is removed. Pin Copy v0.8 cannot unregister another extension's listeners.
+A content script from an older enabled extension continues running even if its visible UI is removed. Pluck v0.8 cannot unregister another extension's listeners.
 
 If the problem remains, record a Safari Web Inspector Timeline while scrolling and inspect:
 
@@ -215,7 +215,7 @@ If the problem remains, record a Safari Web Inspector Timeline while scrolling a
 ```bash
 npm run clean
 npm run ci
-BUNDLE_ID="com.yourname.pincopy.dev" ./scripts/package-safari.sh
+BUNDLE_ID="com.yourname.pluck.dev" ./scripts/package-safari.sh
 ```
 
 If Safari caches a damaged local build, use a new development bundle identifier once, disable the old extension, and restart Safari.

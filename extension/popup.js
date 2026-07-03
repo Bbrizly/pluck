@@ -119,7 +119,7 @@ function renderStatus(stored, requestResult = null) {
 
   let qualityState;
   if (!highQualityInput.checked) {
-    qualityState = "reliable mode is on; Pin Copy skips the CDN and uses the loaded image or clean screen crop";
+    qualityState = "reliable mode is on; Pluck skips the CDN and uses the loaded image or clean screen crop";
   } else if (stored.imageAccessVerified) {
     qualityState = "higher-quality mode is on and the CDN fetch has worked before; failures still fall back automatically";
   } else if (requestResult?.requestError || stored.imageAccessLastRequestError) {

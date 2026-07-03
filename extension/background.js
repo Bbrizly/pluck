@@ -1,15 +1,15 @@
 "use strict";
 
-if (typeof importScripts === "function" && !globalThis.PinCopyShared) {
+if (typeof importScripts === "function" && !globalThis.PluckShared) {
   importScripts("shared.js");
 }
 
 const extensionApi = globalThis.browser ?? globalThis.chrome;
-const Shared = globalThis.PinCopyShared;
+const Shared = globalThis.PluckShared;
 
 const MAX_RESPONSE_BYTES = 25 * 1024 * 1024;
 const FETCH_TIMEOUT_MS = 8000;
-const INIT_BRIDGE_MESSAGE_TYPE = "PIN_COPY_INIT_PAGE_BRIDGE";
+const INIT_BRIDGE_MESSAGE_TYPE = "PLUCK_INIT_PAGE_BRIDGE";
 const ALLOWED_MIME_TYPES = new Set([
   "image/png",
   "image/jpeg",
@@ -27,7 +27,7 @@ extensionApi.runtime.onMessage.addListener((message, sender) => {
   }
 
   if (Shared.isFetchMessage(message)) {
-    return fetchSelectedImage(message.url);
+    return fetchSelectedImage(message.url, sender);
   }
 
   return undefined;
@@ -95,7 +95,11 @@ function isPinterestPageUrl(rawUrl) {
   }
 }
 
-async function fetchSelectedImage(rawUrl) {
+async function fetchSelectedImage(rawUrl, sender) {
+  if (!isPinterestPageUrl(sender?.url || sender?.tab?.url)) {
+    return failure("FETCH_SENDER_REJECTED");
+  }
+
   const url = Shared.normalizeImageUrl(rawUrl);
   if (!url) {
     return failure("URL_REJECTED");

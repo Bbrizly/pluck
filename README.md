@@ -1,107 +1,151 @@
-# Pin Copy
+<div align="center">
 
-Copy a Pinterest feed image to the clipboard without opening the Pin.
+<img src="docs/logo.png" width="128" alt="Pluck">
 
-Hover a still image, click **Copy**, paste it into Messages, Slack, Figma, ChatGPT, or anything else that accepts PNG from the clipboard. No account, no server, no analytics.
+# Pluck
 
-**v0.8.0** — Safari on macOS is the working target. The repo also builds Chromium and Firefox packages from the same source; those still need live browser testing before I'd call them supported.
+*Hover a pin. Pluck the image. Paste it anywhere.*
 
-## Why I built this
+![Manifest V3](https://img.shields.io/badge/manifest-v3-171717?style=flat-square)
+![Safari, Chrome, Firefox](https://img.shields.io/badge/safari%20%C2%B7%20chrome%20%C2%B7%20firefox-171717?style=flat-square)
+![59 tests passing](https://img.shields.io/badge/tests-59%20passing-171717?style=flat-square)
+![No tracking](https://img.shields.io/badge/tracking-none-171717?style=flat-square)
 
-Pinterest's default flow for grabbing a reference image is:
+**No account · No server · No analytics**
 
-```text
-open pin → copy or save → back to feed → repeat
-```
+</div>
 
-I wanted:
+---
 
-```text
-hover → copy → paste
+Copy a Pinterest feed image straight to your clipboard without ever opening the Pin. Hover a still image, click **Copy**, and paste a clean PNG into Messages, Slack, Figma, ChatGPT, or anything else that reads images from the clipboard.
+
+> **v0.8.0** · Safari on macOS is the proven target. The same source also builds Chromium and Firefox packages; those still need live browser testing before I would call them supported.
+
+## Before and after
+
+```mermaid
+flowchart LR
+  subgraph before["Pinterest's default flow"]
+    direction LR
+    a1([Open Pin]) --> a2([Copy or save]) --> a3([Back to feed]) --> a4([Repeat])
+  end
+  subgraph after["With Pluck"]
+    direction LR
+    b1([Hover]) --> b2([Copy]) --> b3([Paste])
+  end
+  before ~~~ after
 ```
 
 ## What works today
 
 - A small **Copy** button on still images in the home feed, search results, and boards
-- Carousel pins copy the slide that's actually visible
+- Carousel pins copy the slide that is actually visible
 - Video pins are skipped
-- PNG on the system clipboard
-- Optional higher-res fetch from `i.pinimg.com` when the page exposes a larger URL (off by default)
-- Fallback to the loaded `<img>`, then a cropped visible-tab screenshot if canvas extraction is blocked
-- Screenshot path strips Pinterest hover UI — Save button, dark scrim, **Last visited** chip — before capture
+- A clean PNG on the system clipboard
+- Optional higher-res fetch from `i.pinimg.com` when the page exposes a larger URL, off by default
+- A layered fallback: loaded `<img>` first, then a cropped visible-tab screenshot if canvas extraction is blocked
+- The screenshot path strips Pinterest hover UI (Save button, dark scrim, **Last visited** chip) before capture
 - Diagnostics mode to see which stage of the pipeline succeeded or failed
 
 ## What it avoids on purpose
 
-Pinterest's feed is a constantly mutating masonry grid. Pin Copy does not:
+Pinterest's feed is a constantly mutating masonry grid. Pluck deliberately does **not**:
 
-- observe the whole document subtree;
-- rescan the page on a timer;
-- prefetch images before you click Copy;
-- read the clipboard;
+- observe the whole document subtree,
+- rescan the page on a timer,
+- prefetch images before you click Copy,
+- read the clipboard,
 - talk to a backend.
 
-Pointer movement only stores coordinates. Image detection runs when the pointer enters a new element. The overlay hides while you're scrolling and does one debounced check after scroll settles.
+Pointer movement only stores coordinates. Image detection runs when the pointer enters a new element. The overlay hides while you scroll and does one debounced check after scrolling settles.
 
-## Copy pipeline
+## How a copy works
 
-Safari will reject `navigator.clipboard.write()` if it isn't tied to the original physical click. That's why the extension uses a MAIN-world bridge: the click opens the clipboard write synchronously, and the extension resolves the PNG bytes afterward.
+Safari rejects `navigator.clipboard.write()` unless it is tied to the original physical click. So the extension opens the clipboard write **synchronously** inside a MAIN-world bridge, then resolves the PNG bytes afterward. Each stage below is a fallback for the one before it.
 
-```text
-trusted click on Copy button
-        │
-        ▼
-MAIN-world bridge starts clipboard.write(PNG promise)
-        │
-        ▼
-optional: fetch largest exposed i.pinimg.com URL
-        │ fail
-        ▼
-draw the loaded <img> to canvas
-        │ tainted / blocked
-        ▼
-hide Pin Copy UI, strip Pinterest overlays
-        │
-        ▼
-capture visible tab → crop to image bounds → PNG
-        │
-        ▼
-resolve clipboard promise
+```mermaid
+flowchart TD
+  A([Trusted click on the Copy button]) --> B[MAIN-world bridge opens<br>clipboard.write with a pending PNG]
+  B --> C{Higher-res URL<br>exposed on the page?}
+  C -->|yes| D[Fetch the largest<br>i.pinimg.com image]
+  C -->|no| E[Draw the loaded image<br>element onto a canvas]
+  D --> F{Decoded to<br>clean bytes?}
+  E --> F
+  F -->|clean| Z([Resolve the clipboard promise])
+  F -->|tainted or blocked| G[Hide Pluck UI,<br>strip Pinterest overlays]
+  G --> H[Capture the visible tab]
+  H --> I[Crop to the image bounds,<br>encode PNG]
+  I --> Z
+
+  classDef ok fill:#e7f5ec,stroke:#2f9e57,color:#14532d;
+  classDef warn fill:#fbeee6,stroke:#c96f3a,color:#7c2d12;
+  class Z ok;
+  class G,H,I warn;
 ```
 
-The weird-looking reliability code exists because each of those stages broke in Safari at least once. See [`docs/ENGINEERING_HISTORY.md`](docs/ENGINEERING_HISTORY.md) before "simplifying" anything.
+The reliability code looks heavier than the happy path deserves because every one of these stages broke in Safari at least once. Read [`docs/ENGINEERING_HISTORY.md`](docs/ENGINEERING_HISTORY.md) before "simplifying" anything.
+
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+  subgraph page["Pinterest page"]
+    direction TB
+    content["content.js<br>detection, overlay, pipeline"]
+    bridge["page-clipboard.js<br>MAIN-world clipboard bridge"]
+    content <-->|custom events| bridge
+  end
+  subgraph ext["Extension worker"]
+    bg["background.js<br>fetch, tab capture, injection"]
+  end
+  content <-->|validated messages| bg
+  bg -->|one image URL per fetch| net(["i.pinimg.com"])
+```
+
+Full detail on worlds, messages, and security boundaries lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Repository layout
 
 ```text
-extension/          WebExtension source (shared across browsers)
-  manifest.json     Safari-first MV3
-  content.js        detection, overlay, copy pipeline
-  page-clipboard.js MAIN-world clipboard bridge
-  background.js     fetch, tab capture, bridge injection
-  shared.js         URL validation, srcset ranking
-  popup.html/js     settings and optional CDN permission
-tests/              Node regression tests (48 at v0.8.0)
-scripts/            validate, build, package, Safari wrapper
-docs/               architecture, porting, CI, debugging
-.github/workflows/  CI on push/PR; release on version tags
+extension/            WebExtension source, shared across browsers
+  manifest.json       Safari-first MV3
+  content.js          detection, overlay, copy pipeline
+  page-clipboard.js   MAIN-world clipboard bridge
+  background.js       fetch, tab capture, bridge injection
+  shared.js           URL validation, srcset ranking
+  popup.html / popup.js   settings and optional CDN permission
+tests/                Node regression tests
+scripts/              validate, build, package, Safari wrapper
+docs/                 architecture, porting, CI, debugging
+.github/workflows/    CI on push and PR; release on version tags
 ```
 
 File-by-file detail: [`docs/CODEBASE_DEEP_DIVE.md`](docs/CODEBASE_DEEP_DIVE.md).
 
+## Install
+
+Store listings roll out per [`docs/STORE_PUBLISHING.md`](docs/STORE_PUBLISHING.md). Until a given store is live, every browser can install straight from the [GitHub Releases](../../releases) ZIPs, which are rebuilt on every tagged version.
+
+| Browser | Package | Load it |
+|---|---|---|
+| Chrome, Brave, Opera | `pluck-chromium-<version>.zip` | Unzip, open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, select the unzipped folder |
+| Edge | `pluck-chromium-<version>.zip` | Same as Chrome, via `edge://extensions` |
+| Firefox | `pluck-firefox-<version>.zip` | Unzip, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, select `manifest.json` (temporary until the AMO listing is live) |
+| Safari | `pluck-safari-<version>.zip` | Unzip, then follow [`docs/SAFARI_INSTALLATION.md`](docs/SAFARI_INSTALLATION.md), which needs Xcode |
+
 ## Safari setup (macOS)
 
-You need macOS, Safari, Xcode, and Node 20+.
+You need macOS, Safari, Xcode, and Node 20 or newer.
 
 ```bash
 npm run ci
 chmod +x scripts/package-safari.sh
-BUNDLE_ID="com.yourname.pincopy.dev" ./scripts/package-safari.sh
+BUNDLE_ID="com.yourname.pluck.dev" ./scripts/package-safari.sh
 ```
 
-Then in Xcode: sign both targets for local development, select **My Mac**, **⌘R**. Enable the extension under **Safari → Settings → Extensions**, allow Pinterest access, reload Pinterest.
+Then in Xcode: sign both targets for local development, select **My Mac**, press **Cmd R**. Enable the extension under **Safari > Settings > Extensions**, allow Pinterest access, and reload Pinterest.
 
-Step-by-step: [`docs/SAFARI_INSTALLATION.md`](docs/SAFARI_INSTALLATION.md).
+Step by step: [`docs/SAFARI_INSTALLATION.md`](docs/SAFARI_INSTALLATION.md).
 
 ## Developer commands
 
@@ -110,44 +154,28 @@ npm test             # unit and regression tests
 npm run validate     # manifest, permissions, syntax, required docs
 npm run build        # dist/safari, dist/chromium, dist/firefox
 npm run package:all  # ZIPs under releases/
-npm run ci           # validate + test + build (same as GitHub Actions core)
+npm run ci           # validate + test + build (same as CI)
 npm run clean        # remove dist/ and releases/
 ```
 
 ## Other browsers
 
-One codebase, three generated packages. Don't fork six separate apps.
+One codebase, three generated packages. Do not fork six separate apps.
 
 | Browser | Load from | Notes |
 |---|---|---|
-| Safari | `dist/safari` + Xcode wrapper | proven target |
-| Chrome, Edge, Brave | `dist/chromium` | same package; separate store listings |
-| Firefox | `dist/firefox` | different background manifest; needs signing |
+| Safari | `dist/safari` plus the Xcode wrapper | proven target |
+| Chrome, Edge, Brave | `dist/chromium` | same package, separate store listings |
+| Firefox | `dist/firefox` | different background manifest, needs signing |
 
-```bash
-npm run build
-```
-
-Porting checklist and test matrix: [`docs/BROWSER_PORTING.md`](docs/BROWSER_PORTING.md).
-
-Suggested rollout order: Safari → Chrome → Edge/Brave → Firefox → Opera.
+Suggested rollout order: Safari, then Chrome, then Edge and Brave, then Firefox, then Opera. Porting checklist and test matrix: [`docs/BROWSER_PORTING.md`](docs/BROWSER_PORTING.md).
 
 ## Privacy and security
 
-Pin Copy only touches Pinterest domains (plus optional `i.pinimg.com` for higher-quality mode). The background worker accepts exactly one validated image URL per fetch message — no general proxy, no `<all_urls>`, no credentials on fetch, no clipboard read.
-
-Persistent settings are local booleans (enabled, diagnostics, higher-quality). Nothing is uploaded.
+Pluck only touches Pinterest domains, plus optional `i.pinimg.com` for higher-quality mode. The background worker accepts exactly one validated image URL per fetch message: no general proxy, no `<all_urls>`, no credentials on fetch, no clipboard read. Persistent settings are local booleans (enabled, diagnostics, higher-quality) and nothing is uploaded.
 
 - [`PRIVACY.md`](PRIVACY.md)
 - [`SECURITY.md`](SECURITY.md)
-
-## CI
-
-Push and PR runs validate, 48 tests, and builds all three browser targets. Packages upload as workflow artifacts.
-
-Tag `v0.8.0` (must match `package.json`) triggers a GitHub Release with Safari, Chromium, and Firefox ZIPs plus checksums. Store submission is still manual — each platform wants its own screenshots, privacy answers, and review.
-
-Details: [`docs/CI_CD.md`](docs/CI_CD.md).
 
 ## Documentation
 
@@ -160,18 +188,19 @@ Details: [`docs/CI_CD.md`](docs/CI_CD.md).
 | [DEBUGGING.md](docs/DEBUGGING.md) | tracing a failed copy |
 | [PERFORMANCE.md](docs/PERFORMANCE.md) | scroll and detection model |
 | [RELEASE_CHECKLIST.md](docs/RELEASE_CHECKLIST.md) | pre-ship manual matrix |
-| [ENGINEERING_HISTORY.md](docs/ENGINEERING_HISTORY.md) | v0.1–v0.8 breakage log |
+| [STORE_PUBLISHING.md](docs/STORE_PUBLISHING.md) | one-time store setup, then automated releases |
+| [ENGINEERING_HISTORY.md](docs/ENGINEERING_HISTORY.md) | v0.1 to v0.8 breakage log |
 | [STORE_ASSETS.md](docs/STORE_ASSETS.md) | icons and listing assets |
 
 ## Known limits
 
-- Screenshot fallback only captures the visible portion of a partially off-screen pin.
-- Screenshot path is more fragile to Pinterest UI changes than direct byte extraction.
-- A dirty clipboard image is worse than a clean failure — if an overlay can't be removed, the extension should fail rather than paste junk.
+- The screenshot fallback only captures the visible portion of a partially off-screen pin.
+- The screenshot path is more fragile to Pinterest UI changes than direct byte extraction.
+- A dirty clipboard image is worse than a clean failure. If an overlay cannot be removed, the extension fails rather than pasting junk.
 
 ## Contributing
 
-[`CONTRIBUTING.md`](CONTRIBUTING.md) — keep changes narrow, preserve the trusted-click sequence, add a regression test for every reproduced bug.
+[`CONTRIBUTING.md`](CONTRIBUTING.md). Keep changes narrow, preserve the trusted-click sequence, and add a regression test for every reproduced bug.
 
 ## License
 

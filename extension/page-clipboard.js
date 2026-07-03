@@ -1,18 +1,18 @@
 (() => {
   "use strict";
 
-  const INSTALL_FLAG = "__PIN_COPY_PAGE_CLIPBOARD_BRIDGE_V80__";
-  const RESULT_EVENT = "pin-copy:clipboard-result";
-  const READY_EVENT = "pin-copy:clipboard-bridge-ready";
-  const PROBE_EVENT = "pin-copy:clipboard-bridge-probe";
-  const CHANNEL = "pin-copy-extension-clipboard";
-  const OVERLAY_SELECTOR = "[data-pin-copy-overlay=\"true\"], #pin-copy-extension-root";
-  const REQUEST_ID_ATTRIBUTE = "data-pin-copy-request-id";
-  const COPY_ACTION_ATTRIBUTE = "data-pin-copy-action";
-  const RESULT_ID_ATTRIBUTE = "data-pin-copy-result-id";
-  const RESULT_OK_ATTRIBUTE = "data-pin-copy-result-ok";
-  const RESULT_ERROR_ATTRIBUTE = "data-pin-copy-result-error";
-  const BRIDGE_ATTRIBUTE = "data-pin-copy-bridge";
+  const INSTALL_FLAG = "__PLUCK_PAGE_CLIPBOARD_BRIDGE_V80__";
+  const RESULT_EVENT = "pluck:clipboard-result";
+  const READY_EVENT = "pluck:clipboard-bridge-ready";
+  const PROBE_EVENT = "pluck:clipboard-bridge-probe";
+  const CHANNEL = "pluck-extension-clipboard";
+  const OVERLAY_SELECTOR = "[data-pluck-overlay=\"true\"], #pluck-extension-root";
+  const REQUEST_ID_ATTRIBUTE = "data-pluck-request-id";
+  const COPY_ACTION_ATTRIBUTE = "data-pluck-action";
+  const RESULT_ID_ATTRIBUTE = "data-pluck-result-id";
+  const RESULT_OK_ATTRIBUTE = "data-pluck-result-ok";
+  const RESULT_ERROR_ATTRIBUTE = "data-pluck-result-error";
+  const BRIDGE_ATTRIBUTE = "data-pluck-bridge";
   const REQUEST_TIMEOUT_MS = 15000;
 
   if (window[INSTALL_FLAG]) {

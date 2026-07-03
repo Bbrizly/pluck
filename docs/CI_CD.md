@@ -1,11 +1,12 @@
 # CI/CD and Release Engineering
 
-Pin Copy's automation has two jobs:
+Pluck's automation has three jobs:
 
 1. prove the repository is internally consistent;
-2. produce reviewable browser packages without silently publishing them.
+2. produce reviewable browser packages and a GitHub Release, always, for free;
+3. submit that release to each browser store automatically, but only once you've done that store's one-time manual setup and added its credentials as a repo secret.
 
-Automatic store publication is intentionally not enabled yet. Browser stores require credentials, policy declarations, screenshots, reviewer notes, staged rollout decisions, and sometimes manual approval. The repository creates deterministic artifacts and a GitHub Release; store submission remains an explicit release decision.
+Store publication (job 3) is opt-in per store: every step in `publish-stores` checks for its own secrets first and logs a skip message instead of failing if they're absent. See [`docs/STORE_PUBLISHING.md`](STORE_PUBLISHING.md) for the setup each store needs before its step does anything. Safari is not part of this automation — it needs a paid Apple Developer account and stays a manual release for now.
 
 ## Workflow overview
 
@@ -24,10 +25,16 @@ Tag vX.Y.Z
         │
         ▼
 .github/workflows/release.yml
+  job: release
         ├─ verify tag matches package + manifest version
         ├─ run full CI
         ├─ create browser ZIPs
-        └─ create GitHub Release with artifacts
+        ├─ create GitHub Release with artifacts
+        └─ upload ZIPs as a workflow artifact for the next job
+  job: publish-stores (needs: release)
+        ├─ Chrome Web Store  — skips unless CHROME_* secrets are set
+        ├─ Edge Add-ons      — skips unless EDGE_* secrets are set
+        └─ Firefox AMO       — skips unless FIREFOX_API_* secrets are set
 ```
 
 ## Local CI parity
@@ -81,9 +88,9 @@ No CI test can fully prove Safari's real clipboard, permission sheet, Retina scr
 `npm run package:all` produces:
 
 ```text
-releases/pin-copy-safari-<version>.zip
-releases/pin-copy-chromium-<version>.zip
-releases/pin-copy-firefox-<version>.zip
+releases/pluck-safari-<version>.zip
+releases/pluck-chromium-<version>.zip
+releases/pluck-firefox-<version>.zip
 ```
 
 Each archive has `manifest.json` at its root.
@@ -92,7 +99,7 @@ The Safari ZIP is the WebExtension source package. Local Xcode development still
 
 ## Versioning
 
-Pin Copy uses semantic versioning:
+Pluck uses semantic versioning:
 
 - **Patch**: bug fix, Pinterest selector adjustment, performance fix, diagnostics improvement.
 - **Minor**: new supported Pinterest surface, meaningful user feature, newly certified browser.
@@ -123,7 +130,7 @@ npm run package:all
 6. Tag:
 
 ```bash
-git tag -a v0.8.0 -m "Pin Copy v0.8.0"
+git tag -a v0.8.0 -m "Pluck v0.8.0"
 git push origin main --tags
 ```
 
@@ -133,102 +140,41 @@ If the tag version does not equal `package.json`, the release workflow fails.
 
 ## Store publication strategy
 
-## Chrome Web Store
+`publish-stores` (see the workflow diagram above) submits Chrome, Edge, and Firefox automatically once each store's one-time manual setup is done and its credentials are added as GitHub secrets. Full setup steps, exact secret names, and costs per store live in [`docs/STORE_PUBLISHING.md`](STORE_PUBLISHING.md) — this section only covers what isn't already there.
 
-Chrome accepts a ZIP containing the extension files with `manifest.json` at the root. The Chrome Web Store API can later automate upload and publication.
+Before turning Chrome/Edge on for real users, use their private/trusted-tester and unlisted rollout stages manually at least once — `publish-stores` always publishes to whatever visibility the listing is currently set to; it does not manage staged rollout for you.
 
-Recommended rollout:
+## Brave and Opera
 
-1. upload `pin-copy-chromium-<version>.zip`;
-2. use private/trusted testers;
-3. move to unlisted;
-4. move to public after telemetry-free manual validation and support readiness.
-
-Do not automatically publish every Git tag to the public store. Package creation and public rollout should be separate controls.
-
-## Microsoft Edge Add-ons
-
-Use the Chromium ZIP. Edge documents Chrome extension porting as mostly compatible, but submit it as a separate store item and validate browser behavior first.
-
-Initial releases should be manual. Add automation only after the Edge product ID and credentials are stable.
-
-## Brave
-
-Brave users can install Chromium-compatible extensions from the Chrome Web Store. Test the Chrome listing directly in Brave. A separate Brave store deployment is not required.
-
-## Firefox / AMO
-
-Firefox release and beta builds require signed add-ons. Mozilla supports public AMO listings and signed self-distribution.
-
-Before automated signing:
-
-- set a permanent `FIREFOX_EXTENSION_ID`;
-- validate the generated Firefox manifest;
-- test the background-document environment;
-- decide public listing versus self-distribution;
-- create AMO API credentials.
-
-Do not rotate the Firefox extension ID after release; it identifies the installed add-on and its update path.
+Both install Chromium-compatible extensions from the Chrome Web Store (Brave) or their own review channel (Opera). Test the Chrome listing directly in Brave; submit to Opera Add-ons separately if that listing is worth maintaining. Neither has its own automation — they ride on the Chrome Web Store publish or stay manual.
 
 ## Safari / App Store Connect
 
-Safari requires Apple distribution setup. The current local path uses Xcode packaging and signing.
+Not part of `publish-stores` — Safari needs a paid Apple Developer account first. The current local path uses Xcode packaging and signing (`scripts/package-safari.sh`). Once that account exists, the natural next job is:
 
-A future production pipeline may use:
+```text
+upload-safari-testflight
+  needs: release
+  runs-on: macos
+  environment: production
+  requires: Apple Developer Program membership, App Store Connect API key
+```
 
-- App Store Connect WebExtension ZIP packaging;
-- Xcode archive upload;
-- TestFlight for staged validation;
-- App Store release after review.
-
-Apple signing credentials and App Store Connect keys must live in repository secrets, never in source.
-
-## Opera
-
-Use the Chromium candidate as the starting package. Opera has its own add-on review and acceptance criteria. Keep submission manual until the value of maintaining a separate listing is proven.
+It should upload and validate first, and publish/release only through a separate explicit action — Safari review and staged rollout are slower and less reversible than the Chromium/Firefox stores. Apple signing credentials and App Store Connect keys must live in repository secrets, never in source.
 
 ## Secrets policy
 
 Never commit:
 
-- Chrome Web Store OAuth refresh tokens;
-- AMO JWT issuer/secret;
+- Chrome Web Store OAuth client secret or refresh token (`CHROME_CLIENT_SECRET`, `CHROME_REFRESH_TOKEN`);
+- Edge Add-ons client secret (`EDGE_CLIENT_SECRET`);
+- AMO API secret (`FIREFOX_API_SECRET`);
 - App Store Connect API keys;
 - Apple signing certificates or provisioning profiles;
-- store product IDs that are meant to remain private;
+- store product/item IDs that are meant to remain private;
 - private keys or `.p12` files.
 
-Use GitHub Environments to separate:
-
-```text
-staging
-production
-```
-
-Require manual approval for the production environment.
-
-## Recommended future deployment jobs
-
-Only add these after the relevant browser port is certified:
-
-```text
-publish-chrome
-  needs: release
-  environment: production
-  input: explicit workflow_dispatch approval
-
-sign-firefox
-  needs: release
-  environment: production
-  output: signed XPI
-
-upload-safari-testflight
-  needs: release
-  runs-on: macos
-  environment: production
-```
-
-Each job should upload first and publish/release only through a separate explicit action.
+All of the above belong in GitHub repo secrets (**Settings → Secrets and variables → Actions**) — see [`docs/STORE_PUBLISHING.md`](STORE_PUBLISHING.md) for exactly which names each store needs. If rollout ever needs a manual-approval gate before a store step runs, move that step into a GitHub Environment with required reviewers; none of the current stores are set up with one, so every secret that's present fires automatically on tag push.
 
 ## Rollback
 

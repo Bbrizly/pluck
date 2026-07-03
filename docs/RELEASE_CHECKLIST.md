@@ -38,7 +38,7 @@ npm run package:all
 - [ ] Denied CDN permission still falls back.
 - [ ] **Last visited** overlay is not copied.
 - [ ] Save controls are not copied.
-- [ ] Pin Copy UI is not copied.
+- [ ] Pluck UI is not copied.
 - [ ] Diagnostics are off by default.
 - [ ] Preview opens the raw clipboard image.
 - [ ] ChatGPT paste works.

@@ -11,6 +11,11 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    # Set once you have a stable AMO listing (see docs/STORE_PUBLISHING.md).
+    # Embeds browser_specific_settings.gecko.id in the Firefox package itself,
+    # so the GitHub Release artifact matches what gets submitted to AMO.
+    env:
+      FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID }}
 
     steps:
       - name: Checkout
@@ -51,4 +56,100 @@ jobs:
             releases/*.zip releases/SHA256SUMS.txt \
             --verify-tag \
             --generate-notes \
-            --title "Pin Copy $GITHUB_REF_NAME"
+            --title "Pluck $GITHUB_REF_NAME"
+
+      - name: Upload release archives for store publishing
+        uses: actions/upload-artifact@v4
+        with:
+          name: pluck-release-archives
+          path: releases/
+          retention-days: 7
+
+  publish-stores:
+    name: Publish to browser stores
+    runs-on: ubuntu-latest
+    needs: release
+    # Every step below no-ops with a clear message if its store's secrets
+    # aren't set yet, so this job is safe to leave enabled while you set
+    # stores up one at a time. See docs/STORE_PUBLISHING.md.
+    env:
+      FIREFOX_EXTENSION_ID: ${{ secrets.FIREFOX_EXTENSION_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download release archives
+        uses: actions/download-artifact@v4
+        with:
+          name: pluck-release-archives
+          path: releases/
+
+      - name: Rebuild dist/firefox as a signing source directory
+        run: npm run build
+
+      - name: Publish to Chrome Web Store
+        env:
+          CHROME_EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+          CHROME_CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+          CHROME_CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+          CHROME_REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${CHROME_EXTENSION_ID:-}" ]]; then
+            echo "CHROME_EXTENSION_ID not set; skipping Chrome Web Store publish."
+            exit 0
+          fi
+          zip="releases/pluck-chromium-$(node -p "require('./package.json').version").zip"
+          npx --yes chrome-webstore-upload-cli@3 upload \
+            --source "$zip" \
+            --extension-id "$CHROME_EXTENSION_ID" \
+            --client-id "$CHROME_CLIENT_ID" \
+            --client-secret "$CHROME_CLIENT_SECRET" \
+            --refresh-token "$CHROME_REFRESH_TOKEN"
+          npx --yes chrome-webstore-upload-cli@3 publish \
+            --extension-id "$CHROME_EXTENSION_ID" \
+            --client-id "$CHROME_CLIENT_ID" \
+            --client-secret "$CHROME_CLIENT_SECRET" \
+            --refresh-token "$CHROME_REFRESH_TOKEN"
+
+      - name: Publish to Microsoft Edge Add-ons
+        env:
+          EDGE_PRODUCT_ID: ${{ secrets.EDGE_PRODUCT_ID }}
+          EDGE_CLIENT_ID: ${{ secrets.EDGE_CLIENT_ID }}
+          EDGE_CLIENT_SECRET: ${{ secrets.EDGE_CLIENT_SECRET }}
+          EDGE_ACCESS_TOKEN_URL: ${{ secrets.EDGE_ACCESS_TOKEN_URL }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${EDGE_PRODUCT_ID:-}" ]]; then
+            echo "EDGE_PRODUCT_ID not set; skipping Edge Add-ons publish."
+            exit 0
+          fi
+          zip="releases/pluck-chromium-$(node -p "require('./package.json').version").zip"
+          node scripts/publish-edge.mjs "$zip"
+
+      - name: Publish to Firefox Add-ons (AMO)
+        env:
+          FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+          FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${FIREFOX_API_KEY:-}" ]]; then
+            echo "FIREFOX_API_KEY not set; skipping AMO publish."
+            exit 0
+          fi
+          npx --yes web-ext@latest sign \
+            --source-dir dist/firefox \
+            --artifacts-dir releases/firefox-signed \
+            --api-key "$FIREFOX_API_KEY" \
+            --api-secret "$FIREFOX_API_SECRET" \
+            --channel listed
+
+      - name: Note Safari status
+        run: |
+          echo "Safari is not published automatically: it requires a paid Apple Developer account."
+          echo "dist/safari and scripts/package-safari.sh stay ready for whenever that's set up. See docs/STORE_PUBLISHING.md."

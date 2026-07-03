@@ -162,13 +162,13 @@ test("higher-quality byte transport uses Safari-safe base64 and preserves fallba
 
 test("v0.8.0 owns one versioned UI instance and removes only newly inserted stale roots", () => {
   assert.match(contentSource, /CONTENT_VERSION_ATTRIBUTE/);
-  assert.match(contentSource, /pin-copy-v80-overlay-root/);
-  assert.match(contentSource, /pin-copy-v80-diagnostics-root/);
+  assert.match(contentSource, /pluck-v80-overlay-root/);
+  assert.match(contentSource, /pluck-v80-diagnostics-root/);
   assert.match(contentSource, /UI_ROOT_SELECTOR/);
   assert.match(contentSource, /startUiDeduplicationGuard\(\)/);
   assert.match(contentSource, /observer\.observe\(document\.documentElement, \{ childList: true \}\)/);
   assert.doesNotMatch(contentSource, /subtree:\s*true/);
-  assert.match(contentSource, /Removed \$\{removed\} stale Pin Copy UI root/);
+  assert.match(contentSource, /Removed \$\{removed\} stale Pluck UI root/);
 });
 
 test("diagnostics updates do not create a MutationObserver feedback loop", () => {
@@ -178,8 +178,8 @@ test("diagnostics updates do not create a MutationObserver feedback loop", () =>
 
 test("screen fallback clears Pinterest hover state and strips overlay branches before capture", () => {
   assert.match(contentSource, /prepareCleanPinterestCapture\(\)/);
-  assert.match(contentSource, /data-pin-copy-capture-shield/);
-  assert.match(contentSource, /data-pin-copy-capture-path/);
+  assert.match(contentSource, /data-pluck-capture-shield/);
+  assert.match(contentSource, /data-pluck-capture-path/);
   assert.match(contentSource, /visibility", "hidden", "important"/);
   assert.match(contentSource, /pointer-events", "none", "important"/);
   assert.match(contentSource, /Pinterest hover UI suppressed/);
@@ -198,7 +198,7 @@ test("higher-quality toggle persists before Safari can close the popup permissio
 test("persistent Last visited overlays are explicitly removed and verified before capture", () => {
   assert.match(contentSource, /pin-card-last-visited-overlay/);
   assert.match(contentSource, /PINTEREST_PERSISTENT_IMAGE_OVERLAY_SELECTOR/);
-  assert.match(contentSource, /data-pin-copy-persistent-overlay/);
+  assert.match(contentSource, /data-pluck-persistent-overlay/);
   assert.match(contentSource, /verifyClean\(\)/);
   assert.match(contentSource, /CAPTURE_PERSISTENT_OVERLAY_REMAINED/);
   assert.match(contentSource, /Persistent image overlays suppressed, including Last visited/);

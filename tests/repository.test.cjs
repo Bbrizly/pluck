@@ -36,7 +36,7 @@ test("browser build script generates Safari, Chromium, and Firefox targets", () 
 
 test("background source supports both service workers and Firefox background documents", () => {
   assert.match(backgroundSource, /typeof importScripts === "function"/);
-  assert.match(backgroundSource, /!globalThis\.PinCopyShared/);
+  assert.match(backgroundSource, /!globalThis\.PluckShared/);
 });
 
 
@@ -55,7 +55,8 @@ test("maintainer documentation is present", () => {
     "docs/CODEBASE_DEEP_DIVE.md",
     "docs/BROWSER_PORTING.md",
     "docs/CI_CD.md",
-    "docs/RELEASE_CHECKLIST.md"
+    "docs/RELEASE_CHECKLIST.md",
+    "docs/STORE_PUBLISHING.md"
   ]) {
     assert.equal(fs.existsSync(path.join(root, file)), true, `missing ${file}`);
   }

@@ -9,7 +9,7 @@ rm -rf "$ROOT/releases"
 mkdir -p "$ROOT/releases"
 
 for target in safari chromium firefox; do
-  archive="$ROOT/releases/pin-copy-${target}-${VERSION}.zip"
+  archive="$ROOT/releases/pluck-${target}-${VERSION}.zip"
   (
     cd "$ROOT/dist/$target"
     zip -q -r "$archive" . -x '*.DS_Store'

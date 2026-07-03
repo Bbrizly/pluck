@@ -1,6 +1,6 @@
-# Porting Pin Copy to Every Major Browser
+# Porting Pluck to Every Major Browser
 
-Pin Copy should remain **one product with one shared codebase**, not six browser forks.
+Pluck should remain **one product with one shared codebase**, not six browser forks.
 
 The correct model is:
 
@@ -79,7 +79,7 @@ Use `dist/safari` or the working `extension/` directory.
 For local development:
 
 ```bash
-BUNDLE_ID="com.yourname.pincopy.dev" ./scripts/package-safari.sh
+BUNDLE_ID="com.yourname.pluck.dev" ./scripts/package-safari.sh
 ```
 
 For public distribution, Safari Web Extensions are packaged and distributed through Apple's tooling and App Store Connect.
@@ -186,7 +186,7 @@ Temporary add-ons disappear when Firefox restarts. Public or self-distributed re
 For a signed Firefox build, provide an ID while building:
 
 ```bash
-FIREFOX_EXTENSION_ID="pin-copy@yourdomain.example" npm run build
+FIREFOX_EXTENSION_ID="pluck@yourdomain.example" npm run build
 ```
 
 The build script adds `browser_specific_settings.gecko.id` only when the environment variable is set.
@@ -218,7 +218,9 @@ Do not publish the placeholder domain. Use an ID you control and keep it stable 
 | PNG ClipboardItem promise | Working | Must validate | Must validate |
 | Visible-tab capture | Working | Must validate | Must validate |
 | Store package generated | Yes | Yes | Yes |
-| Public store release | Not automated | Not automated | Not automated |
+| Public store release | Manual (needs paid Apple Developer account) | Automated after one-time setup | Automated after one-time setup |
+
+"Automated after one-time setup" means `publish-stores` in `.github/workflows/release.yml` submits every tagged release automatically once you've done that store's manual first listing and added its API credentials as GitHub secrets — see [`docs/STORE_PUBLISHING.md`](STORE_PUBLISHING.md).
 
 ## The porting sequence
 
@@ -262,6 +264,8 @@ Test the Chromium artifact and submit separately if an Opera listing is worth ma
 Opera should not block the main multi-browser launch.
 
 ## Store distribution map
+
+One-time account setup and credentials for each row: [`docs/STORE_PUBLISHING.md`](STORE_PUBLISHING.md).
 
 | Browser | Distribution |
 |---|---|

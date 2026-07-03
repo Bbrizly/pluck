@@ -1,10 +1,10 @@
 # Privacy
 
-Pin Copy is designed to work locally.
+Pluck is designed to work locally.
 
-## Data Pin Copy does not collect
+## Data Pluck does not collect
 
-Pin Copy does not collect, transmit, sell, or store:
+Pluck does not collect, transmit, sell, or store:
 
 - Pinterest account information;
 - Pin URLs;
@@ -21,18 +21,18 @@ Pin Copy does not collect, transmit, sell, or store:
 
 ## Local settings
 
-Pin Copy stores a small number of settings in the browser's local extension storage:
+Pluck stores a small number of settings in the browser's local extension storage:
 
 - whether the extension is enabled;
 - whether diagnostics are visible;
 - whether higher-quality mode is enabled;
 - diagnostic records of whether an optional image-host request or fetch succeeded.
 
-These values remain on the user's device unless the browser itself synchronizes extension storage. Pin Copy does not operate a server that receives them.
+These values remain on the user's device unless the browser itself synchronizes extension storage. Pluck does not operate a server that receives them.
 
 ## Network requests
 
-Pin Copy makes no developer-controlled network requests.
+Pluck makes no developer-controlled network requests.
 
 When the user explicitly clicks Copy and higher-quality mode is enabled, the extension may request the selected image from:
 
@@ -45,13 +45,13 @@ The request:
 - is initiated only for the selected image;
 - omits credentials;
 - omits the page referrer;
-- is not stored by Pin Copy after the copy operation.
+- is not stored by Pluck after the copy operation.
 
-When this path is unavailable, Pin Copy uses the already-loaded image or a local visible-tab capture fallback.
+When this path is unavailable, Pluck uses the already-loaded image or a local visible-tab capture fallback.
 
 ## Clipboard
 
-Pin Copy writes a PNG image to the clipboard after a user click.
+Pluck writes a PNG image to the clipboard after a user click.
 
 It does not read existing clipboard contents.
 
