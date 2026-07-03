@@ -23,17 +23,26 @@ Copy a Pinterest feed image straight to your clipboard without ever opening the 
 
 ## Before and after
 
+Pluck removes the Pin-page detour. You stay in the feed, copy the visible image, and paste it wherever you were already working.
+
 ```mermaid
 flowchart LR
-  subgraph before["Pinterest's default flow"]
+  subgraph old["Without Pluck"]
     direction LR
-    a1([Open Pin]) --> a2([Copy or save]) --> a3([Back to feed]) --> a4([Repeat])
+    oldFeed["Feed"] --> oldOpen["Open Pin"] --> oldCopy["Copy / save"] --> oldBack["Back"] --> oldRepeat["Repeat"]
   end
-  subgraph after["With Pluck"]
+
+  subgraph new["With Pluck"]
     direction LR
-    b1([Hover]) --> b2([Copy]) --> b3([Paste])
+    newFeed["Feed"] --> newHover["Hover image"] --> newCopy["Copy"] --> newPaste["Paste"]
   end
-  before ~~~ after
+
+  old ~~~ new
+
+  classDef oldPath fill:#fff7ed,stroke:#c2410c,color:#7c2d12;
+  classDef newPath fill:#ecfdf5,stroke:#059669,color:#064e3b;
+  class oldFeed,oldOpen,oldCopy,oldBack,oldRepeat oldPath;
+  class newFeed,newHover,newCopy,newPaste newPath;
 ```
 
 ## What works today
@@ -65,23 +74,38 @@ Safari rejects `navigator.clipboard.write()` unless it is tied to the original p
 
 ```mermaid
 flowchart TD
-  A([Trusted click on the Copy button]) --> B[MAIN-world bridge opens<br>clipboard.write with a pending PNG]
-  B --> C{Higher-res URL<br>exposed on the page?}
-  C -->|yes| D[Fetch the largest<br>i.pinimg.com image]
-  C -->|no| E[Draw the loaded image<br>element onto a canvas]
-  D --> F{Decoded to<br>clean bytes?}
-  E --> F
-  F -->|clean| Z([Resolve the clipboard promise])
-  F -->|tainted or blocked| G[Hide Pluck UI,<br>strip Pinterest overlays]
-  G --> H[Capture the visible tab]
-  H --> I[Crop to the image bounds,<br>encode PNG]
-  I --> Z
+  click(["1. Click Copy"]) --> bridge["2. Bridge starts<br/>clipboard write"]
+  bridge --> choice{"Higher-res<br/>enabled?"}
 
-  classDef ok fill:#e7f5ec,stroke:#2f9e57,color:#14532d;
-  classDef warn fill:#fbeee6,stroke:#c96f3a,color:#7c2d12;
-  class Z ok;
-  class G,H,I warn;
+  choice -->|yes| fetch["Try CDN fetch"]
+  choice -->|no| canvas["Try loaded image"]
+
+  fetch --> fetchOk{"Clean bytes?"}
+  fetchOk -->|yes| done(["Clipboard gets PNG"])
+  fetchOk -->|no| canvas
+
+  canvas --> canvasOk{"Canvas clean?"}
+  canvasOk -->|yes| done
+  canvasOk -->|no| clean["Hide UI overlays"]
+  clean --> capture["Capture tab"]
+  capture --> crop["Crop image"]
+  crop --> done
+
+  classDef start fill:#f8fafc,stroke:#475569,color:#0f172a;
+  classDef decision fill:#eff6ff,stroke:#2563eb,color:#172554;
+  classDef success fill:#ecfdf5,stroke:#059669,color:#064e3b;
+  classDef fallback fill:#fff7ed,stroke:#c2410c,color:#7c2d12;
+  class click,bridge,fetch,canvas start;
+  class choice,fetchOk,canvasOk decision;
+  class done success;
+  class clean,capture,crop fallback;
 ```
+
+Reading the diagram:
+
+- **CDN fetch** is optional and highest quality, but only for a validated `i.pinimg.com` URL.
+- **Loaded image** is the normal local path from the image already on the page.
+- **Capture tab** is the last resort after Pluck and Pinterest hover UI are hidden.
 
 The reliability code looks heavier than the happy path deserves because every one of these stages broke in Safari at least once. Read [`docs/ENGINEERING_HISTORY.md`](docs/ENGINEERING_HISTORY.md) before "simplifying" anything.
 
@@ -89,17 +113,38 @@ The reliability code looks heavier than the happy path deserves because every on
 
 ```mermaid
 flowchart LR
-  subgraph page["Pinterest page"]
-    direction TB
-    content["content.js<br>detection, overlay, pipeline"]
-    bridge["page-clipboard.js<br>MAIN-world clipboard bridge"]
-    content <-->|custom events| bridge
+  subgraph tab["Pinterest tab"]
+    dom["Pinterest DOM"]
+    content["content.js<br/>detect + overlay"]
+    bridge["page-clipboard.js<br/>trusted click"]
+    dom -->|visible image| content
+    content -->|PNG bytes| bridge
   end
-  subgraph ext["Extension worker"]
-    bg["background.js<br>fetch, tab capture, injection"]
+
+  subgraph ext["Extension APIs"]
+    bg["background.js<br/>fetch + capture"]
+    popup["popup.js<br/>toggles"]
+    storage[("local settings")]
+    popup --> storage
+    storage --> content
   end
+
+  subgraph outside["Browser / network"]
+    clip[("Clipboard")]
+    cdn[("i.pinimg.com")]
+  end
+
   content <-->|validated messages| bg
-  bg -->|one image URL per fetch| net(["i.pinimg.com"])
+  bridge -->|clipboard write| clip
+  bg -->|optional fetch| cdn
+  bg -.->|visible-tab capture| dom
+
+  classDef tabNode fill:#eef2ff,stroke:#4f46e5,color:#1e1b4b;
+  classDef extNode fill:#f8fafc,stroke:#475569,color:#0f172a;
+  classDef outsideNode fill:#fefce8,stroke:#a16207,color:#713f12;
+  class dom,content,bridge tabNode;
+  class bg,popup,storage extNode;
+  class clip,cdn outsideNode;
 ```
 
 Full detail on worlds, messages, and security boundaries lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
