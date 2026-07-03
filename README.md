@@ -25,24 +25,9 @@ Copy a Pinterest feed image straight to your clipboard without ever opening the 
 
 Pluck removes the Pin-page detour. You stay in the feed, copy the visible image, and paste it wherever you were already working.
 
-```mermaid
-flowchart LR
-  subgraph old["Without Pluck"]
-    direction LR
-    oldFeed["Feed"] --> oldOpen["Open Pin"] --> oldCopy["Copy / save"] --> oldBack["Back"] --> oldRepeat["Repeat"]
-  end
-
-  subgraph new["With Pluck"]
-    direction LR
-    newFeed["Feed"] --> newHover["Hover image"] --> newCopy["Copy"] --> newPaste["Paste"]
-  end
-
-  old ~~~ new
-
-  classDef oldPath fill:#fff7ed,stroke:#c2410c,color:#7c2d12;
-  classDef newPath fill:#ecfdf5,stroke:#059669,color:#064e3b;
-  class oldFeed,oldOpen,oldCopy,oldBack,oldRepeat oldPath;
-  class newFeed,newHover,newCopy,newPaste newPath;
+```text
+Without Pluck   Feed ──▶ Open Pin ──▶ Copy / save ──▶ Back ──▶ Repeat ↺
+With Pluck      Feed ──▶ Hover image ──▶ Copy ──▶ Paste ✓
 ```
 
 ## What works today
@@ -72,79 +57,42 @@ Pointer movement only stores coordinates. Image detection runs when the pointer 
 
 Safari rejects `navigator.clipboard.write()` unless it is tied to the original physical click. So the extension opens the clipboard write **synchronously** inside a MAIN-world bridge, then resolves the PNG bytes afterward. Each stage below is a fallback for the one before it.
 
-```mermaid
-flowchart TD
-  click(["1. Click Copy"]) --> bridge["2. Bridge starts<br/>clipboard write"]
-  bridge --> choice{"Higher-res<br/>enabled?"}
-
-  choice -->|yes| fetch["Try CDN fetch"]
-  choice -->|no| canvas["Try loaded image"]
-
-  fetch --> fetchOk{"Clean bytes?"}
-  fetchOk -->|yes| done(["Clipboard gets PNG"])
-  fetchOk -->|no| canvas
-
-  canvas --> canvasOk{"Canvas clean?"}
-  canvasOk -->|yes| done
-  canvasOk -->|no| clean["Hide UI overlays"]
-  clean --> capture["Capture tab"]
-  capture --> crop["Crop image"]
-  crop --> done
-
-  classDef start fill:#f8fafc,stroke:#475569,color:#0f172a;
-  classDef decision fill:#eff6ff,stroke:#2563eb,color:#172554;
-  classDef success fill:#ecfdf5,stroke:#059669,color:#064e3b;
-  classDef fallback fill:#fff7ed,stroke:#c2410c,color:#7c2d12;
-  class click,bridge,fetch,canvas start;
-  class choice,fetchOk,canvasOk decision;
-  class done success;
-  class clean,capture,crop fallback;
+```text
+1. Click Copy
+       │
+2. Start clipboard write   (synchronous, tied to the physical click)
+       │
+3. CDN fetch (if enabled) ──── clean ────▶ Clipboard gets PNG
+       │                                        ▲
+   off / failed                                 │
+       │                                        │
+4. Loaded image → canvas ──── clean ────────────┤
+       │                                        │
+    blocked                                     │
+       │                                        │
+5. Clean screenshot crop ───────────────────────┘
 ```
 
 Reading the diagram:
 
 - **CDN fetch** is optional and highest quality, but only for a validated `i.pinimg.com` URL.
 - **Loaded image** is the normal local path from the image already on the page.
-- **Capture tab** is the last resort after Pluck and Pinterest hover UI are hidden.
+- **Clean screenshot** is the last resort after Pluck and Pinterest hover UI are hidden.
 
 The reliability code looks heavier than the happy path deserves because every one of these stages broke in Safari at least once. Read [`docs/ENGINEERING_HISTORY.md`](docs/ENGINEERING_HISTORY.md) before "simplifying" anything.
 
 ## Architecture at a glance
 
-```mermaid
-flowchart LR
-  subgraph tab["Pinterest tab"]
-    dom["Pinterest DOM"]
-    content["content.js<br/>detect + overlay"]
-    bridge["page-clipboard.js<br/>trusted click"]
-    dom -->|visible image| content
-    content -->|PNG bytes| bridge
-  end
+```text
+Pinterest DOM ──visible image──▶ content.js          ──PNG bytes──▶ page-clipboard.js
+      ▲                          (detect + overlay)                 (trusted click)
+      │                              ▲    │                               │
+      │ visible-tab capture          │    │ validated messages     clipboard write
+      │                              │    ▼                               ▼
+ background.js ◀────────────────────────┘                            [ Clipboard ]
+ (fetch + capture) ──optional fetch──▶ [ i.pinimg.com ]
 
-  subgraph ext["Extension APIs"]
-    bg["background.js<br/>fetch + capture"]
-    popup["popup.js<br/>toggles"]
-    storage[("local settings")]
-    popup --> storage
-    storage --> content
-  end
-
-  subgraph outside["Browser / network"]
-    clip[("Clipboard")]
-    cdn[("i.pinimg.com")]
-  end
-
-  content <-->|validated messages| bg
-  bridge -->|clipboard write| clip
-  bg -->|optional fetch| cdn
-  bg -.->|visible-tab capture| dom
-
-  classDef tabNode fill:#eef2ff,stroke:#4f46e5,color:#1e1b4b;
-  classDef extNode fill:#f8fafc,stroke:#475569,color:#0f172a;
-  classDef outsideNode fill:#fefce8,stroke:#a16207,color:#713f12;
-  class dom,content,bridge tabNode;
-  class bg,popup,storage extNode;
-  class clip,cdn outsideNode;
+ popup.js (toggles) ──▶ [ local settings ] ──▶ content.js
 ```
 
 Full detail on worlds, messages, and security boundaries lives in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
