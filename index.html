@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pluck, copy Pinterest images from the feed</title>
+<meta name="description" content="Hover a pin, click Copy, paste a clean PNG anywhere. No account, no server, no analytics. Safari, Chrome, Firefox.">
+<link rel="icon" href="favicon.png">
+<meta property="og:title" content="Pluck">
+<meta property="og:description" content="Hover a pin. Pluck the image. Paste it anywhere.">
+<meta property="og:image" content="docs/logo.png">
+<style>
+  :root{
+    --ink:#171717; --paper:#faf9f7; --muted:#6b6b6b; --line:#e6e3de;
+    --card:#ffffff; --accent:#e60023; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:860px; margin:0 auto; padding:0 24px}
+  a{color:inherit}
+  .topnav{padding:18px 24px}
+  .topnav a{display:inline-block; padding:9px 16px; border:1px solid var(--line); border-radius:999px;
+    background:var(--card); text-decoration:none; font-size:14px; font-weight:600; color:var(--muted)}
+  header{padding:56px 0 48px; text-align:center}
+  header img.logo{width:96px; height:96px; border-radius:22px}
+  h1{font-size:clamp(40px,8vw,64px); letter-spacing:-.03em; margin:20px 0 6px}
+  .tag{font-size:20px; color:var(--muted); margin:0}
+  .pills{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:22px 0 0}
+  .pill{font-size:12px; letter-spacing:.02em; background:var(--ink); color:#fff; padding:6px 12px; border-radius:999px}
+  .cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:34px 0 0}
+  .btn{display:inline-block; padding:12px 22px; border-radius:999px; text-decoration:none; font-weight:600; font-size:15px}
+  .btn.primary{background:var(--accent); color:#fff}
+  .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line)}
+  .demo{margin:48px auto 0; max-width:380px}
+  .demo img{width:100%; border:1px solid var(--line); border-radius:var(--radius); display:block}
+  section{padding:56px 0; border-top:1px solid var(--line)}
+  h2{font-size:13px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin:0 0 24px; font-weight:700}
+  .ba{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .ba .box{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px}
+  .ba h3{margin:0 0 10px; font-size:14px; letter-spacing:.02em}
+  .ba code{font:13px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace; color:var(--muted); display:block; white-space:pre-wrap}
+  .ba .with h3{color:var(--accent)}
+  .feats{display:grid; grid-template-columns:1fr 1fr; gap:14px 32px}
+  .feat{display:flex; gap:12px; align-items:flex-start}
+  .feat .dot{flex:0 0 6px; height:6px; width:6px; border-radius:50%; background:var(--accent); margin-top:11px}
+  .feat p{margin:0}
+  .install{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .install .box{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px}
+  .install h3{margin:0 0 6px; font-size:16px}
+  .install p{margin:0; color:var(--muted); font-size:14px}
+  .install .box.pending{opacity:.72}
+  .badge{font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:3px 8px; border-radius:6px; background:#eef; color:#334; margin-left:8px; vertical-align:2px}
+  .badge.soon{background:#f1efe9; color:#8a7f6b}
+  .priv p{color:var(--muted)}
+  .priv ul{color:var(--muted); padding-left:20px}
+  footer{padding:56px 0 80px; text-align:center; border-top:1px solid var(--line)}
+  footer .meta{color:var(--muted); font-size:14px; margin:0 0 22px}
+  footer .links{display:flex; gap:16px; justify-content:center; flex-wrap:wrap}
+  footer .links a{display:inline-block; padding:16px 30px; font-size:18px; font-weight:600;
+    border:1px solid var(--line); border-radius:14px; background:var(--card); text-decoration:none; min-width:160px}
+  @media(max-width:640px){
+    .ba,.feats,.install{grid-template-columns:1fr}
+    header{padding:56px 0 32px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="https://bbrizly.github.io/">bbrizly.github.io</a>
+</nav>
+
+<header class="wrap">
+  <img class="logo" src="docs/logo.png" alt="Pluck logo">
+  <h1>Pluck</h1>
+  <p class="tag">Hover a pin. Pluck the image. Paste it anywhere.</p>
+  <div class="pills">
+    <span class="pill">No account</span>
+    <span class="pill">No server</span>
+    <span class="pill">No analytics</span>
+  </div>
+  <div class="cta">
+    <a class="btn primary" href="https://github.com/Bbrizly/pluck/releases">Download</a>
+    <a class="btn ghost" href="https://github.com/Bbrizly/pluck">View source</a>
+  </div>
+  <div class="demo">
+    <img src="docs/pluck-demo.gif" alt="Hover a pin, click Copy, paste anywhere">
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>Before &amp; after</h2>
+    <div class="ba">
+      <div class="box"><h3>Without Pluck</h3><code>Feed → Open Pin → Copy → Back → Repeat ↺</code></div>
+      <div class="box with"><h3>With Pluck</h3><code>Feed → Hover image → Copy → Paste ✓</code></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What it does</h2>
+    <div class="feats">
+      <div class="feat"><span class="dot"></span><p>A small <strong>Copy</strong> button on still images in the feed, search, and boards.</p></div>
+      <div class="feat"><span class="dot"></span><p>Copies a clean PNG straight to your system clipboard.</p></div>
+      <div class="feat"><span class="dot"></span><p>Carousel pins copy the slide that's actually visible; video pins are skipped.</p></div>
+      <div class="feat"><span class="dot"></span><p>Optional higher-res fetch when the page exposes a larger URL, off by default.</p></div>
+      <div class="feat"><span class="dot"></span><p>Strips Pinterest hover UI before capture, so you never paste junk.</p></div>
+      <div class="feat"><span class="dot"></span><p>Never reads your clipboard, never talks to a backend.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Install</h2>
+    <div class="install">
+      <a class="box" href="https://github.com/Bbrizly/pluck/releases">
+        <h3>Safari <span class="badge">macOS</span></h3>
+        <p>Proven target. Grab the release ZIP and follow the Xcode steps.</p>
+      </a>
+      <a class="box" href="https://github.com/Bbrizly/pluck/releases">
+        <h3>Chrome / Edge / Brave</h3>
+        <p>Load the chromium ZIP unpacked from the releases page.</p>
+      </a>
+      <a class="box" href="https://github.com/Bbrizly/pluck/releases">
+        <h3>Firefox</h3>
+        <p>Load the firefox ZIP as a temporary add-on.</p>
+      </a>
+      <div class="box pending">
+        <h3>Web stores <span class="badge soon">soon</span></h3>
+        <p>Chrome Web Store, Edge Add-ons, AMO &amp; App Store listings are rolling out.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="priv" id="privacy">
+    <h2>Privacy</h2>
+    <p>Pluck runs entirely on your device. It does <strong>not</strong> collect, transmit, or store:</p>
+    <ul>
+      <li>Pinterest account info, pin/image URLs, or copied images</li>
+      <li>Clipboard contents, browsing history, or search queries</li>
+      <li>Device identifiers, analytics, telemetry, or crash reports</li>
+    </ul>
+    <p>The only settings stored are local booleans (enabled, diagnostics, higher-quality). The one possible network request, an optional <code>i.pinimg.com</code> image fetch, happens only when you click Copy with higher-quality mode on, without credentials or referrer, and is never retained. Full policy:
+      <a href="privacy.html">read the full privacy policy</a>.</p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <p class="meta">Pluck · Manifest V3</p>
+  <div class="links">
+    <a href="https://github.com/Bbrizly/pluck">GitHub</a>
+    <a href="privacy.html">Privacy</a>
+  </div>
+</footer>
+
+</body>
+</html>

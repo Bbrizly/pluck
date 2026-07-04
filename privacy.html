@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pluck Privacy</title>
+<meta name="description" content="Pluck runs entirely on your device. No accounts, no server, no analytics.">
+<link rel="icon" href="favicon.png">
+<style>
+  :root{ --ink:#171717; --paper:#faf9f7; --muted:#6b6b6b; --line:#e6e3de; --card:#ffffff; --accent:#e60023; }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:740px; margin:0 auto; padding:0 24px}
+  a{color:var(--accent)}
+  .topnav{padding:18px 24px}
+  .topnav a{display:inline-block; padding:9px 16px; border:1px solid var(--line); border-radius:999px;
+    background:var(--card); text-decoration:none; font-size:14px; font-weight:600; color:var(--muted)}
+  header{padding:40px 0 8px; text-align:center}
+  header img{width:64px; height:64px; border-radius:16px}
+  h1{font-size:38px; letter-spacing:-.03em; margin:16px 0 4px}
+  .sub{color:var(--muted); margin:0 0 8px}
+  main{padding:24px 0 40px}
+  h2{font-size:13px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin:36px 0 12px; font-weight:700}
+  p{margin:0 0 14px}
+  ul{margin:0 0 16px; padding-left:22px}
+  li{margin:4px 0}
+  code{font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace; background:#f1efe9; padding:2px 6px; border-radius:6px}
+  footer{padding:40px 0 72px; border-top:1px solid var(--line); text-align:center}
+  footer .links{display:flex; gap:16px; justify-content:center; flex-wrap:wrap}
+  footer .links a{display:inline-block; padding:16px 30px; font-size:18px; font-weight:600; color:var(--ink);
+    border:1px solid var(--line); border-radius:14px; background:var(--card); text-decoration:none; min-width:160px}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="./">Back to Pluck</a>
+</nav>
+
+<div class="wrap">
+  <header>
+    <img src="docs/logo.png" alt="Pluck logo">
+    <h1>Privacy</h1>
+    <p class="sub">Pluck is designed to work locally.</p>
+  </header>
+
+  <main>
+    <h2>Data Pluck does not collect</h2>
+    <p>Pluck does not collect, transmit, sell, or store:</p>
+    <ul>
+      <li>Pinterest account information</li>
+      <li>Pin URLs</li>
+      <li>image URLs as history</li>
+      <li>copied images</li>
+      <li>clipboard contents</li>
+      <li>browsing history</li>
+      <li>search queries</li>
+      <li>board names</li>
+      <li>user or device identifiers</li>
+      <li>analytics or telemetry</li>
+      <li>crash reports sent to the developer</li>
+    </ul>
+
+    <h2>Local settings</h2>
+    <p>Pluck stores a small number of settings in the browser's local extension storage:</p>
+    <ul>
+      <li>whether the extension is enabled</li>
+      <li>whether diagnostics are visible</li>
+      <li>whether higher-quality mode is enabled</li>
+      <li>diagnostic records of whether an optional image-host request succeeded</li>
+    </ul>
+    <p>These values remain on your device unless the browser itself synchronizes extension storage. Pluck does not operate a server that receives them.</p>
+
+    <h2>Network requests</h2>
+    <p>Pluck makes no developer-controlled network requests. When you explicitly click Copy and higher-quality mode is enabled, the extension may request the selected image from <code>https://i.pinimg.com/</code>. That request is made only for the selected image, omits credentials, omits the page referrer, and is not stored by Pluck after the copy. When this path is unavailable, Pluck uses the already-loaded image or a local visible-tab capture fallback.</p>
+
+    <h2>Clipboard</h2>
+    <p>Pluck writes a PNG image to the clipboard after a user click. It does not read existing clipboard contents.</p>
+
+    <h2>Diagnostics</h2>
+    <p>Diagnostics are off by default. When enabled, the panel displays local runtime stages and error codes. Diagnostic output is not transmitted to the developer.</p>
+
+    <h2>Changes</h2>
+    <p>If future versions add analytics, remote logging, accounts, cloud processing, or any developer-controlled network service, this document and the store disclosures will be updated before release.</p>
+  </main>
+
+  <footer>
+    <div class="links">
+      <a href="./">Home</a>
+      <a href="https://github.com/Bbrizly/pluck">GitHub</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
