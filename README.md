@@ -199,4 +199,4 @@ Pluck only touches Pinterest domains, plus optional `i.pinimg.com` for higher-qu
 
 ## License
 
-No public license yet. Pick one deliberately before making the repo public.
+[MIT](LICENSE).
