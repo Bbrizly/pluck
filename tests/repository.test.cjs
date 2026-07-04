@@ -30,7 +30,8 @@ test("browser build script generates Safari, Chromium, and Firefox targets", () 
   assert.match(buildSource, /chromium:\s*structuredClone/);
   assert.match(buildSource, /firefox:\s*createFirefoxManifest/);
   assert.match(buildSource, /scripts:\s*\["shared\.js", "background\.js"\]/);
-  assert.match(buildSource, /service_worker:\s*"background\.js"/);
+  // Chromium/Safari keep the MV3 service worker; Firefox drops it (AMO warns).
+  assert.equal(manifest.background.service_worker, "background.js");
 });
 
 
