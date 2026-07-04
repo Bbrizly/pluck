@@ -41,12 +41,10 @@ console.log(`Built Safari, Chromium, and Firefox candidates in ${distDir}`);
 function createFirefoxManifest(base) {
   const manifest = structuredClone(base);
 
-  // Firefox currently uses a non-persistent background document for MV3,
-  // while Chromium uses a service worker. Including both lets each browser
-  // select the environment it supports.
+  // Firefox uses a non-persistent background document for MV3. It ignores
+  // service_worker and warns if present, so the Firefox build ships scripts only.
   manifest.background = {
-    scripts: ["shared.js", "background.js"],
-    service_worker: "background.js"
+    scripts: ["shared.js", "background.js"]
   };
 
   // Firefox MV3 requires a gecko id to lint/sign. Use the release secret when
