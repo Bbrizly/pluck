@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/logo.png" width="128" alt="Pluck">
+<img src="docs/logo.png" width="170" alt="Pluck">
 
 # Pluck
 
