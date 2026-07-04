@@ -23,6 +23,8 @@ Copy a Pinterest feed image straight to your clipboard without ever opening the 
 
 > **v0.8.0** · Safari on macOS is the proven target. The same source also builds Chromium and Firefox packages; those still need live browser testing before I would call them supported.
 
+- **Status:** Awaiting approval for google, edge, firefox.
+
 ## Before and after
 
 Pluck removes the Pin-page detour. You stay in the feed, copy the visible image, and paste it wherever you were already working.
