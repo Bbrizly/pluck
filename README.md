@@ -6,6 +6,8 @@
 
 *Hover a pin. Pluck the image. Paste it anywhere.*
 
+<img src="docs/pluck-demo.gif" width="760" alt="Hover a pin, click Copy, paste anywhere">
+
 ![Manifest V3](https://img.shields.io/badge/manifest-v3-171717?style=flat-square)
 ![Safari, Chrome, Firefox](https://img.shields.io/badge/safari%20%C2%B7%20chrome%20%C2%B7%20firefox-171717?style=flat-square)
 ![59 tests passing](https://img.shields.io/badge/tests-59%20passing-171717?style=flat-square)

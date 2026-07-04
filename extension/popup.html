@@ -5,38 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pluck</title>
   <style>
-    :root { color-scheme: light dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { width: 276px; margin: 0; padding: 16px; background: Canvas; color: CanvasText; }
-    h1 { margin: 0 0 4px; font-size: 16px; }
-    .intro { margin: 0 0 14px; font-size: 12px; opacity: 0.72; }
-    .setting { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 9px 0; font-size: 13px; font-weight: 600; }
-    .setting + .setting { border-top: 1px solid color-mix(in srgb, CanvasText 14%, transparent); }
-    input { width: 20px; height: 20px; flex: 0 0 auto; }
-    #status { margin-top: 10px; font-size: 11px; opacity: 0.72; }
-    .help { margin: 12px 0 0; padding: 10px; border-radius: 8px; background: color-mix(in srgb, CanvasText 7%, transparent); font-size: 11px; line-height: 1.4; }
+    :root {
+      color-scheme: light;
+      --red: #e60023;
+      --ink: #111111;
+      --muted: #767676;
+      --fill: #f1f1f1;
+      --track: #e2e2e2;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { width: 288px; margin: 0; padding: 16px; background: #fff; color: var(--ink); }
+
+    header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    header img { width: 34px; height: 34px; border-radius: 12px; }
+    h1 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+    .intro { margin: 1px 0 0; font-size: 12px; color: var(--muted); }
+
+    .card { background: var(--fill); border-radius: 18px; padding: 4px 14px; }
+    .setting { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 11px 0; font-size: 13.5px; font-weight: 600; }
+    .setting + .setting { border-top: 1px solid rgba(0,0,0,0.06); }
+
+    /* Pinterest-style pill toggle (pure CSS, keeps checkbox semantics) */
+    input[type="checkbox"] {
+      appearance: none; -webkit-appearance: none;
+      margin: 0; flex: 0 0 auto; cursor: pointer;
+      width: 42px; height: 25px; border-radius: 999px;
+      background: var(--track); transition: background 0.15s ease;
+    }
+    input[type="checkbox"]::after {
+      content: ""; display: block; width: 21px; height: 21px; margin: 2px;
+      border-radius: 50%; background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.28); transition: transform 0.15s ease;
+    }
+    input[type="checkbox"]:checked { background: var(--red); }
+    input[type="checkbox"]:checked::after { transform: translateX(17px); }
+    input[type="checkbox"]:disabled { opacity: 0.5; }
+    input[type="checkbox"]:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+    #status { margin: 12px 2px 0; font-size: 11px; line-height: 1.4; color: var(--muted); }
+    .help { margin: 10px 0 0; padding: 11px 13px; border-radius: 14px; background: color-mix(in srgb, var(--red) 8%, #fff); color: var(--ink); font-size: 11px; line-height: 1.45; }
+    .help strong { color: var(--red); }
   </style>
 </head>
 <body>
-  <h1>Pluck</h1>
-  <p class="intro">Hover a Pinterest image, then click Copy.</p>
+  <header>
+    <img src="icons/icon-128.png" alt="">
+    <div>
+      <h1>Pluck</h1>
+      <p class="intro">Hover any Pinterest image, then click Copy.</p>
+    </div>
+  </header>
 
-  <label class="setting">
-    Enabled on Pinterest
-    <input id="enabled" type="checkbox" checked>
-  </label>
+  <div class="card">
+    <label class="setting">
+      Enabled on Pinterest
+      <input id="enabled" type="checkbox" checked>
+    </label>
 
-  <label class="setting">
-    Show diagnostics
-    <input id="debugEnabled" type="checkbox">
-  </label>
+    <label class="setting">
+      Diagnostics
+      <input id="debugEnabled" type="checkbox">
+    </label>
 
-  <label class="setting">
-    Prefer higher-quality image first
-    <input id="highQualityEnabled" type="checkbox">
-  </label>
+    <label class="setting">
+      Higher-quality source
+      <input id="highQualityEnabled" type="checkbox">
+    </label>
+  </div>
 
   <div id="status" aria-live="polite"></div>
-  <p class="help"><strong>Recommended: leave higher-quality mode off.</strong> Normal mode uses the already-loaded image and falls back to a clean screen crop. Turning it on tries Pinterest’s CDN first, but it can never block the normal fallback.</p>
+  <p class="help"><strong>Keep this off.</strong> Pluck copies the loaded image and falls back to a clean screen crop. On, it tries Pinterest’s CDN first — the fallback always stays.</p>
   <script src="popup.js"></script>
 </body>
 </html>

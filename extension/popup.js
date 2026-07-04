@@ -114,21 +114,21 @@ async function readStatusState() {
 }
 
 function renderStatus(stored, requestResult = null) {
-  const extensionState = enabledInput.checked ? "Copy is enabled" : "Copy is disabled";
-  const debugState = debugInput.checked ? "diagnostics are on" : "diagnostics are off";
+  const extensionState = enabledInput.checked ? "Copy on" : "Copy off";
+  const debugState = debugInput.checked ? "diagnostics on" : "diagnostics off";
 
   let qualityState;
   if (!highQualityInput.checked) {
-    qualityState = "reliable mode is on; Pluck skips the CDN and uses the loaded image or clean screen crop";
+    qualityState = "reliable mode — loaded image or clean crop";
   } else if (stored.imageAccessVerified) {
-    qualityState = "higher-quality mode is on and the CDN fetch has worked before; failures still fall back automatically";
+    qualityState = "higher quality on — CDN fetch has worked before; still falls back";
   } else if (requestResult?.requestError || stored.imageAccessLastRequestError) {
-    qualityState = "higher-quality mode is on, but Safari did not confirm access; copying still falls back automatically";
+    qualityState = "higher quality on — access unconfirmed; still falls back";
   } else if (requestResult?.requestAttempted || stored.imageAccessRequestAccepted) {
-    qualityState = "higher-quality mode is on; the next copy will try the CDN first and fall back automatically";
+    qualityState = "higher quality on — tries CDN first, then falls back";
   } else {
-    qualityState = "higher-quality mode is on; Safari may ask for image access, and failures fall back automatically";
+    qualityState = "higher quality on — Safari may ask for access; still falls back";
   }
 
-  status.textContent = `${extensionState}; ${debugState}; ${qualityState}.`;
+  status.textContent = `${extensionState} · ${debugState} · ${qualityState}.`;
 }
