@@ -23,7 +23,7 @@ Copy a Pinterest feed image straight to your clipboard without ever opening the 
 
 > **v0.8.0** · Safari on macOS is the proven target. The same source also builds Chromium and Firefox packages; those still need live browser testing before I would call them supported.
 
-- **Status:** Awaiting approval for google, edge, firefox.
+- **Approved:** firefox | **Status:** Awaiting approval for google, edge.
 
 ## Before and after
 
