@@ -123,12 +123,12 @@ File-by-file detail: [`docs/CODEBASE_DEEP_DIVE.md`](docs/CODEBASE_DEEP_DIVE.md).
 
 Store listings roll out per [`docs/STORE_PUBLISHING.md`](docs/STORE_PUBLISHING.md). Until a given store is live, every browser can install straight from the [GitHub Releases](../../releases) ZIPs, which are rebuilt on every tagged version.
 
-| Browser | Package | Load it |
-|---|---|---|
-| Chrome, Brave, Opera | `pluck-chromium-<version>.zip` | Unzip, open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, select the unzipped folder |
-| Edge | `pluck-chromium-<version>.zip` | Same as Chrome, via `edge://extensions` |
-| Firefox | `pluck-firefox-<version>.zip` | Unzip, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, select `manifest.json` (temporary until the AMO listing is live) |
-| Safari | `pluck-safari-<version>.zip` | Unzip, then follow [`docs/SAFARI_INSTALLATION.md`](docs/SAFARI_INSTALLATION.md), which needs Xcode |
+| Browser | Package | Store | Load it |
+|---|---|---|---|
+| Chrome, Brave, Opera | `pluck-chromium-<version>.zip` | Awaiting | Unzip, open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, select the unzipped folder |
+| Edge | `pluck-chromium-<version>.zip` | Awaiting | Same as Chrome, via `edge://extensions` |
+| Firefox | `pluck-firefox-<version>.zip` | [Mozilla Addon store](https://addons.mozilla.org/en-CA/firefox/addon/pinpluck/) | Unzip, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, select `manifest.json` (temporary until the AMO listing is live) |
+| Safari | `pluck-safari-<version>.zip` | Awaiting | Unzip, then follow [`docs/SAFARI_INSTALLATION.md`](docs/SAFARI_INSTALLATION.md), which needs Xcode |
 
 ## Safari setup (macOS)
 
