@@ -6,7 +6,9 @@
 
 *Hover a pin. Pluck the image. Paste it anywhere.*
 
-<img src="docs/pluck-demo.gif" width="360" alt="Hover a pin, click Copy, paste anywhere">
+<a href="https://www.youtube.com/watch?v=s2CGVL8R3t4"><img src="docs/pluck-demo.gif" width="360" alt="Hover a pin, click Copy, paste anywhere"></a>
+
+<sub><a href="https://www.youtube.com/watch?v=s2CGVL8R3t4">▶ Watch the full demo</a></sub>
 
 ![Manifest V3](https://img.shields.io/badge/manifest-v3-171717?style=flat-square)
 ![Safari, Chrome, Firefox](https://img.shields.io/badge/safari%20%C2%B7%20chrome%20%C2%B7%20firefox-171717?style=flat-square)
