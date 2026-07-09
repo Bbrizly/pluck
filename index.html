@@ -58,11 +58,14 @@
   .badge.soon{background:#f1efe9; color:#8a7f6b}
   .priv p{color:var(--muted)}
   .priv ul{color:var(--muted); padding-left:20px}
+  #get-pluck{scroll-margin-top:24px}
   footer{padding:56px 0 80px; text-align:center; border-top:1px solid var(--line)}
-  footer .meta{color:var(--muted); font-size:14px; margin:0 0 22px}
+  footer h2{font-size:13px; text-transform:uppercase; letter-spacing:.14em; color:var(--muted); margin:0 0 24px; font-weight:700}
+  footer .meta{color:var(--muted); font-size:14px; margin:28px 0 22px}
   footer .links{display:flex; gap:16px; justify-content:center; flex-wrap:wrap}
   footer .links a{display:inline-block; padding:16px 30px; font-size:18px; font-weight:600;
     border:1px solid var(--line); border-radius:14px; background:var(--card); text-decoration:none; min-width:160px}
+  footer .links a.primary{background:var(--accent); color:#fff; border-color:var(--accent)}
   @media(max-width:640px){
     .ba,.feats,.install{grid-template-columns:1fr}
     header{padding:56px 0 32px}
@@ -85,7 +88,7 @@
     <span class="pill">No analytics</span>
   </div>
   <div class="cta">
-    <a class="btn primary" href="https://github.com/Bbrizly/pluck/releases">Download</a>
+    <a class="btn primary" href="#get-pluck">Download</a>
     <a class="btn ghost" href="https://github.com/Bbrizly/pluck">View source</a>
   </div>
   <div class="demo">
@@ -118,21 +121,21 @@
   <section>
     <h2>Install</h2>
     <div class="install">
+      <a class="box" href="https://chromewebstore.google.com/detail/pluck/elfpnbkmeejlmmigamabibgofdkoadml">
+        <h3>Chrome / Brave / Opera</h3>
+        <p>Install from the Chrome Web Store. Works in Chrome, Brave, and Opera.</p>
+      </a>
+      <a class="box" href="https://addons.mozilla.org/en-CA/firefox/addon/pinpluck/">
+        <h3>Firefox</h3>
+        <p>Install from Firefox Add-ons. One click, no ZIP required.</p>
+      </a>
       <a class="box" href="https://github.com/Bbrizly/pluck/releases">
         <h3>Safari <span class="badge">macOS</span></h3>
-        <p>Proven target. Grab the release ZIP and follow the Xcode steps.</p>
-      </a>
-      <a class="box" href="https://github.com/Bbrizly/pluck/releases">
-        <h3>Chrome / Edge / Brave</h3>
-        <p>Load the chromium ZIP unpacked from the releases page.</p>
-      </a>
-      <a class="box" href="https://github.com/Bbrizly/pluck/releases">
-        <h3>Firefox</h3>
-        <p>Load the firefox ZIP as a temporary add-on.</p>
+        <p>Download the Safari ZIP from GitHub Releases and follow the Xcode steps.</p>
       </a>
       <div class="box pending">
-        <h3>Web stores <span class="badge soon">soon</span></h3>
-        <p>Chrome Web Store, Edge Add-ons, AMO &amp; App Store listings are rolling out.</p>
+        <h3>Edge <span class="badge soon">awaiting</span></h3>
+        <p>Edge Add-ons listing is pending. Use the Chrome Web Store build in Edge for now.</p>
       </div>
     </div>
   </section>
@@ -151,7 +154,13 @@
 
 </main>
 
-<footer class="wrap">
+<footer class="wrap" id="get-pluck">
+  <h2>Get Pluck</h2>
+  <div class="links">
+    <a class="primary" href="https://chromewebstore.google.com/detail/pluck/elfpnbkmeejlmmigamabibgofdkoadml">Chrome Web Store</a>
+    <a class="primary" href="https://addons.mozilla.org/en-CA/firefox/addon/pinpluck/">Firefox Add-ons</a>
+    <a href="https://github.com/Bbrizly/pluck/releases">Safari (GitHub Release)</a>
+  </div>
   <p class="meta">Pluck · Manifest V3</p>
   <div class="links">
     <a href="https://github.com/Bbrizly/pluck">GitHub</a>

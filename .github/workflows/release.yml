@@ -52,10 +52,27 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          notes_file="$(mktemp)"
+          cat > "$notes_file" <<'EOF'
+          ## Install
+
+          **Browser stores (recommended)**
+
+          - [Chrome Web Store](https://chromewebstore.google.com/detail/pluck/elfpnbkmeejlmmigamabibgofdkoadml) for Chrome, Brave, and Opera
+          - [Firefox Add-ons](https://addons.mozilla.org/en-CA/firefox/addon/pinpluck/)
+
+          **Safari (macOS)**
+
+          Download `pluck-safari-*` below and follow [SAFARI_INSTALLATION.md](https://github.com/Bbrizly/pluck/blob/main/docs/SAFARI_INSTALLATION.md).
+
+          ## Archives
+
+          ZIPs are attached for manual installs and developers. See [README.md](https://github.com/Bbrizly/pluck/blob/main/README.md) for load-unpacked steps.
+          EOF
           gh release create "$GITHUB_REF_NAME" \
             releases/*.zip releases/SHA256SUMS.txt \
             --verify-tag \
-            --generate-notes \
+            --notes-file "$notes_file" \
             --title "Pluck $GITHUB_REF_NAME"
 
       - name: Upload release archives for store publishing
