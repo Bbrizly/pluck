@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 0.8.2
+
+### Copy button
+
+- Matched the hover Copy button to Pinterest's look: red pill, white bold label, darker red on hover.
+
 ## 0.8.1
 
 ### Reliability

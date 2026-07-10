@@ -292,8 +292,8 @@
           height: 34px;
           padding: 0 12px;
           border-radius: 9px;
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          background: rgba(20, 20, 20, 0.86);
+          border: none;
+          background: #e60023;
           color: #fff;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
           contain: layout style paint;
@@ -301,12 +301,12 @@
           align-items: center;
           justify-content: center;
           gap: 7px;
-          font: 600 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          font: 700 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
           cursor: pointer;
           user-select: none;
           transition: opacity 140ms ease, transform 140ms ease, background 140ms ease;
         }
-        button:hover { background: rgba(8, 8, 8, 0.94); }
+        button:hover { background: #ad081b; }
         button:active { transform: scale(0.97); }
         button:focus-visible { outline: 3px solid rgba(255, 255, 255, 0.92); outline-offset: 2px; }
         button[disabled] { cursor: default; opacity: 0.92; }
