@@ -25,6 +25,7 @@
     .card { background: var(--fill); border-radius: 18px; padding: 4px 14px; }
     .setting { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 11px 0; font-size: 13.5px; font-weight: 600; }
     .setting + .setting { border-top: 1px solid rgba(0,0,0,0.06); }
+    .hint { margin: -2px 0 11px; font-size: 11px; line-height: 1.45; color: var(--muted); font-weight: 400; }
 
     /* Pinterest-style pill toggle (pure CSS, keeps checkbox semantics) */
     input[type="checkbox"] {
@@ -43,9 +44,16 @@
     input[type="checkbox"]:disabled { opacity: 0.5; }
     input[type="checkbox"]:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
-    #status { margin: 12px 2px 0; font-size: 11px; line-height: 1.4; color: var(--muted); }
-    .help { margin: 10px 0 0; padding: 11px 13px; border-radius: 14px; background: color-mix(in srgb, var(--red) 8%, #fff); color: var(--ink); font-size: 11px; line-height: 1.45; }
-    .help strong { color: var(--red); }
+    footer { display: flex; margin-top: 12px; }
+    #debugToggle {
+      appearance: none; background: none; border: 0; padding: 4px 0;
+      font: inherit; font-size: 12px; font-weight: 600; color: var(--muted);
+      cursor: pointer;
+    }
+    #debugToggle[aria-pressed="true"] { color: var(--red); }
+    #debugToggle:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; border-radius: 6px; }
+
+    #status { margin: 10px 2px 0; font-size: 11px; line-height: 1.4; color: var(--muted); }
   </style>
 </head>
 <body>
@@ -64,18 +72,16 @@
     </label>
 
     <label class="setting">
-      Diagnostics
-      <input id="debugEnabled" type="checkbox">
-    </label>
-
-    <label class="setting">
       Higher-quality source
       <input id="highQualityEnabled" type="checkbox">
     </label>
+    <p class="hint">Off by default. Pluck copies the image already on your screen. Turn this on to grab Pinterest's full-size file first. It still falls back if that fails, so copy always works.</p>
   </div>
 
-  <div id="status" aria-live="polite"></div>
-  <p class="help"><strong>Keep this off.</strong> Pluck copies the loaded image and falls back to a clean screen crop. On, it tries Pinterest’s CDN first — the fallback always stays.</p>
+  <footer>
+    <button id="debugToggle" type="button" aria-pressed="false">Diagnostics</button>
+  </footer>
+  <div id="status" aria-live="polite" hidden></div>
   <script src="popup.js"></script>
 </body>
 </html>

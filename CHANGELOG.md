@@ -2,6 +2,18 @@
 
 All notable changes are documented here.
 
+## 0.8.1
+
+### Reliability
+
+- Answered Pinterest messages the way Chrome requires, so the higher-quality fetch and the screen-crop fallback work on Chrome, not just Firefox.
+- Added a test that fails if the background script ever drops back to the Firefox-only reply style.
+
+### Popup
+
+- Moved Diagnostics to a button and only show the technical status line when it is on.
+- Replaced the confusing help text with a caption that explains the higher-quality toggle.
+
 ## 0.8.0
 
 ### Performance

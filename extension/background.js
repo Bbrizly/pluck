@@ -17,20 +17,28 @@ const ALLOWED_MIME_TYPES = new Set([
   "image/avif"
 ]);
 
-extensionApi.runtime.onMessage.addListener((message, sender) => {
+extensionApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  let response;
   if (message?.type === INIT_BRIDGE_MESSAGE_TYPE) {
-    return installPageClipboardBridge(sender);
+    response = installPageClipboardBridge(sender);
+  } else if (Shared.isCaptureMessage(message)) {
+    response = captureVisiblePinterestTab(sender);
+  } else if (Shared.isFetchMessage(message)) {
+    response = fetchSelectedImage(message.url, sender);
+  } else {
+    return undefined;
   }
 
-  if (Shared.isCaptureMessage(message)) {
-    return captureVisiblePinterestTab(sender);
-  }
-
-  if (Shared.isFetchMessage(message)) {
-    return fetchSelectedImage(message.url, sender);
-  }
-
-  return undefined;
+  // Chrome ignores a Promise returned from onMessage (crbug 1185241). It only
+  // delivers a reply when the listener returns true and later calls
+  // sendResponse. Returning true plus sendResponse is the cross-browser way
+  // (Firefox and Safari honor it too), so the high-quality fetch, the visible
+  // capture, and the Safari bridge init all reach the content script on Chrome.
+  response.then(
+    sendResponse,
+    (error) => sendResponse(failure("HANDLER_FAILED", undefined, errorDetail(error)))
+  );
+  return true;
 });
 
 async function captureVisiblePinterestTab(sender) {
