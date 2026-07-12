@@ -1,4 +1,4 @@
-# Pluck — Store Listing Copy
+# Pluck Pins — Store Listing Copy
 
 Paste-ready text for Chrome Web Store, Edge Add-ons, Firefox AMO, and the Apple App Store.
 Privacy policy URL (required by every store): **https://bbrizly.github.io/pluck/privacy.html**
@@ -6,7 +6,7 @@ Privacy policy URL (required by every store): **https://bbrizly.github.io/pluck/
 ---
 
 ## Name
-Pluck
+Pluck Pins
 
 ## Category
 Productivity

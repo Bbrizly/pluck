@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUTPUT="${1:-$ROOT/safari-app}"
 BUNDLE_ID="${BUNDLE_ID:-com.example.Pluck}"
+APP_NAME="${APP_NAME:-Pluck Pins}"
 
 if xcrun --find safari-web-extension-packager >/dev/null 2>&1; then
   TOOL="safari-web-extension-packager"
@@ -16,7 +17,7 @@ fi
 
 xcrun "$TOOL" "$ROOT/extension" \
   --project-location "$OUTPUT" \
-  --app-name "Pluck" \
+  --app-name "$APP_NAME" \
   --bundle-identifier "$BUNDLE_ID" \
   --swift
 

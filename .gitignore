@@ -1,7 +1,6 @@
 # Generated browser packages
 /dist/
 /releases/
-/safari-app/
 
 # Apple/Xcode
 DerivedData/

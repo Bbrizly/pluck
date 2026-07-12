@@ -1,4 +1,4 @@
-# Pluck: Mac App Store submission runbook
+# Pluck Pins: Mac App Store submission runbook
 
 First-time submission, written 2026-07-11 for the new Apple Individual account.
 Everything scripted is done. The Apple-side steps below are yours, ~30-45 min.
@@ -10,7 +10,7 @@ Everything scripted is done. The Apple-side steps below are yours, ~30-45 min.
   iOS is a later product change (tap-to-reveal), not a packaging flag.
 - **Bundle id: `com.bbrizly.pluck`.** App target gets it, the extension
   target gets `com.bbrizly.pluck.extension` (the converter appends it).
-- **App name on the store: "Pluck".** Do not put "Pinterest" in the app
+- **App name on the store: "Pluck Pins".** Do not put "Pinterest" in the app
   name or subtitle. Third-party trademarks in the name field are a common
   first-submission rejection. Compatibility wording ("works on Pinterest")
   belongs in the description and is fine there.
@@ -35,7 +35,7 @@ which Safari supports (16.4+). Test step 6 proves it.
    open safari-app/*/*.xcodeproj
    ```
 
-2. In Xcode, for BOTH targets (Pluck app + Pluck Extension):
+2. In Xcode, for BOTH targets (Pluck Pins app + Pluck Extension):
    - Signing & Capabilities: Team = your name (Individual), Automatically
      manage signing ON.
    - General: Version `0.8.2` (must match manifest), Build `1`.
@@ -49,8 +49,8 @@ which Safari supports (16.4+). Test step 6 proves it.
    Upload. Accept defaults.
 
 5. appstoreconnect.apple.com > My Apps > "+" > New App:
-   - Platform macOS, Name `Pluck`, Language English (Canada),
-     Bundle ID `com.bbrizly.pluck`, SKU `pluck`.
+   - Platform macOS, Name `Pluck Pins`, Language English (Canada),
+     Bundle ID `com.bbrizly.pluck`, SKU `pluck-pins`.
    - Paste metadata from the block below.
    - Screenshots: reuse the store set from `docs/STORE_ASSETS.md`. Mac
      accepted sizes: 1280x800, 1440x900, 2560x1600, or 2880x1800. Retake at
