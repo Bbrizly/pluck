@@ -37,6 +37,9 @@ if [[ -n "$PROJECT" && "$APP_NAME" == "Pluck Pins" ]]; then
       $block =~ s/"CODE_SIGN_IDENTITY\[sdk=macosx\*\]" = "[^"]+";/"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";/g;
       $block =~ s/(CODE_SIGN_STYLE = Automatic;\n)/\t\t\t\t"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";\n$1/ unless $block =~ /CODE_SIGN_IDENTITY\[sdk=macosx\*\]/;
       $block =~ s/(CURRENT_PROJECT_VERSION = [^;]+;\n)/$1\t\t\t\tDEVELOPMENT_TEAM = $team;\n/ unless $block =~ /DEVELOPMENT_TEAM = /;
+      if ($block =~ /PRODUCT_BUNDLE_IDENTIFIER = com\.bbrizly\.pluck;/ && $block !~ /LSApplicationCategoryType/) {
+        $block =~ s/(INFOPLIST_KEY_CFBundleDisplayName = [^;]+;\n)/$1\t\t\t\tINFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";\n/;
+      }
       return $block;
     }
     s/(buildSettings = \{.*?\n\t\t\t\};)/fix_signing($1)/ges;
