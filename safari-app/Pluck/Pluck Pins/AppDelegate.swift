@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  macOS (App)
+//  Pluck Pins
 //
 //  Created by Adptiv on 2026-07-12.
 //

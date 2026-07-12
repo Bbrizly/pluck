@@ -1,6 +1,6 @@
 //
 //  SafariWebExtensionHandler.swift
-//  Shared (Extension)
+//  Pluck Pins Extension
 //
 //  Created by Adptiv on 2026-07-12.
 //

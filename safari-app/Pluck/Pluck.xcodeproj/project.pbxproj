@@ -7,82 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3F5060ED300435E800CD3ED6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5060EC300435E800CD3ED6 /* AppDelegate.swift */; };
-		3F5060EF300435E800CD3ED6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5060EE300435E800CD3ED6 /* SceneDelegate.swift */; };
-		3F5060F2300435E800CD3ED6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060F0300435E800CD3ED6 /* LaunchScreen.storyboard */; };
-		3F5060F5300435E800CD3ED6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060F3300435E800CD3ED6 /* Main.storyboard */; };
-		3F5060FE300435E800CD3ED6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5060FD300435E800CD3ED6 /* AppDelegate.swift */; };
-		3F506101300435E800CD3ED6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060FF300435E800CD3ED6 /* Main.storyboard */; };
-		3F506108300435E800CD3ED6 /* Pluck Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3F506107300435E800CD3ED6 /* Pluck Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3F506112300435E900CD3ED6 /* Pluck Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3F506111300435E900CD3ED6 /* Pluck Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		3F506117300435E900CD3ED6 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060DC300435E100CD3ED6 /* Main.html */; };
-		3F506118300435E900CD3ED6 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060DC300435E100CD3ED6 /* Main.html */; };
-		3F506119300435E900CD3ED6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060DE300435E100CD3ED6 /* Icon.png */; };
-		3F50611A300435E900CD3ED6 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060DE300435E100CD3ED6 /* Icon.png */; };
-		3F50611B300435E900CD3ED6 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060DF300435E100CD3ED6 /* Style.css */; };
-		3F50611C300435E900CD3ED6 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060DF300435E100CD3ED6 /* Style.css */; };
-		3F50611D300435E900CD3ED6 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060E0300435E100CD3ED6 /* Script.js */; };
-		3F50611E300435E900CD3ED6 /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060E0300435E100CD3ED6 /* Script.js */; };
-		3F50611F300435E900CD3ED6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5060E1300435E100CD3ED6 /* ViewController.swift */; };
-		3F506120300435E900CD3ED6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5060E1300435E100CD3ED6 /* ViewController.swift */; };
-		3F506121300435E900CD3ED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060E2300435E800CD3ED6 /* Assets.xcassets */; };
-		3F506122300435E900CD3ED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F5060E2300435E800CD3ED6 /* Assets.xcassets */; };
-		3F506123300435E900CD3ED6 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5060E4300435E800CD3ED6 /* SafariWebExtensionHandler.swift */; };
-		3F506124300435E900CD3ED6 /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5060E4300435E800CD3ED6 /* SafariWebExtensionHandler.swift */; };
-		3F50613E300435EA00CD3ED6 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F506136300435EA00CD3ED6 /* popup.js */; };
-		3F50613F300435EA00CD3ED6 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F506137300435EA00CD3ED6 /* background.js */; };
-		3F506140300435EA00CD3ED6 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F506138300435EA00CD3ED6 /* popup.html */; };
-		3F506141300435EA00CD3ED6 /* page-clipboard.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F506139300435EA00CD3ED6 /* page-clipboard.js */; };
-		3F506142300435EA00CD3ED6 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613A300435EA00CD3ED6 /* icons */; };
-		3F506143300435EA00CD3ED6 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613B300435EA00CD3ED6 /* manifest.json */; };
-		3F506144300435EA00CD3ED6 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613C300435EA00CD3ED6 /* content.js */; };
-		3F506145300435EA00CD3ED6 /* shared.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613D300435EA00CD3ED6 /* shared.js */; };
-		3F506146300435EA00CD3ED6 /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F506136300435EA00CD3ED6 /* popup.js */; };
-		3F506147300435EA00CD3ED6 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F506137300435EA00CD3ED6 /* background.js */; };
-		3F506148300435EA00CD3ED6 /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 3F506138300435EA00CD3ED6 /* popup.html */; };
-		3F506149300435EA00CD3ED6 /* page-clipboard.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F506139300435EA00CD3ED6 /* page-clipboard.js */; };
-		3F50614A300435EA00CD3ED6 /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613A300435EA00CD3ED6 /* icons */; };
-		3F50614B300435EA00CD3ED6 /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613B300435EA00CD3ED6 /* manifest.json */; };
-		3F50614C300435EA00CD3ED6 /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613C300435EA00CD3ED6 /* content.js */; };
-		3F50614D300435EA00CD3ED6 /* shared.js in Resources */ = {isa = PBXBuildFile; fileRef = 3F50613D300435EA00CD3ED6 /* shared.js */; };
+		3FE0109C300443A2003A8AAE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0109B300443A2003A8AAE /* AppDelegate.swift */; };
+		3FE010A0300443A2003A8AAE /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 3FE0109E300443A2003A8AAE /* Main.html */; };
+		3FE010A2300443A2003A8AAE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010A1300443A2003A8AAE /* Icon.png */; };
+		3FE010A4300443A2003A8AAE /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010A3300443A2003A8AAE /* Style.css */; };
+		3FE010A6300443A2003A8AAE /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010A5300443A2003A8AAE /* Script.js */; };
+		3FE010A8300443A2003A8AAE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE010A7300443A2003A8AAE /* ViewController.swift */; };
+		3FE010AB300443A2003A8AAE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010A9300443A2003A8AAE /* Main.storyboard */; };
+		3FE010AD300443A3003A8AAE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010AC300443A3003A8AAE /* Assets.xcassets */; };
+		3FE010B4300443A3003A8AAE /* Pluck Pins Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 3FE010B3300443A3003A8AAE /* Pluck Pins Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3FE010B9300443A3003A8AAE /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE010B8300443A3003A8AAE /* SafariWebExtensionHandler.swift */; };
+		3FE010CD300443A4003A8AAE /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010C5300443A4003A8AAE /* popup.js */; };
+		3FE010CE300443A4003A8AAE /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010C6300443A4003A8AAE /* background.js */; };
+		3FE010CF300443A4003A8AAE /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010C7300443A4003A8AAE /* popup.html */; };
+		3FE010D0300443A4003A8AAE /* page-clipboard.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010C8300443A4003A8AAE /* page-clipboard.js */; };
+		3FE010D1300443A4003A8AAE /* icons in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010C9300443A4003A8AAE /* icons */; };
+		3FE010D2300443A4003A8AAE /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010CA300443A4003A8AAE /* manifest.json */; };
+		3FE010D3300443A4003A8AAE /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010CB300443A4003A8AAE /* content.js */; };
+		3FE010D4300443A4003A8AAE /* shared.js in Resources */ = {isa = PBXBuildFile; fileRef = 3FE010CC300443A4003A8AAE /* shared.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3F506109300435E800CD3ED6 /* PBXContainerItemProxy */ = {
+		3FE010B5300443A3003A8AAE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3F5060D6300435E100CD3ED6 /* Project object */;
+			containerPortal = 3FE01090300443A2003A8AAE /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3F506106300435E800CD3ED6;
-			remoteInfo = "Pluck Extension (iOS)";
-		};
-		3F506113300435E900CD3ED6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3F5060D6300435E100CD3ED6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3F506110300435E900CD3ED6;
-			remoteInfo = "Pluck Extension (macOS)";
+			remoteGlobalIDString = 3FE010B2300443A3003A8AAE;
+			remoteInfo = "Pluck Pins Extension";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		3F50612A300435E900CD3ED6 /* Embed Foundation Extensions */ = {
+		3FE010C0300443A3003A8AAE /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3F506108300435E800CD3ED6 /* Pluck Extension.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F506131300435E900CD3ED6 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				3F506112300435E900CD3ED6 /* Pluck Extension.appex in Embed Foundation Extensions */,
+				3FE010B4300443A3003A8AAE /* Pluck Pins Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,60 +52,38 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3F5060DD300435E100CD3ED6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
-		3F5060DE300435E100CD3ED6 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		3F5060DF300435E100CD3ED6 /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
-		3F5060E0300435E100CD3ED6 /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
-		3F5060E1300435E100CD3ED6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3F5060E2300435E800CD3ED6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3F5060E4300435E800CD3ED6 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
-		3F5060E9300435E800CD3ED6 /* Pluck Pins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pluck Pins.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F5060EC300435E800CD3ED6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3F5060EE300435E800CD3ED6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3F5060F1300435E800CD3ED6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3F5060F4300435E800CD3ED6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3F5060F6300435E800CD3ED6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F5060FB300435E800CD3ED6 /* Pluck Pins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pluck Pins.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F5060FD300435E800CD3ED6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3F506100300435E800CD3ED6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3F506102300435E800CD3ED6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F506107300435E800CD3ED6 /* Pluck Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pluck Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F50610C300435E800CD3ED6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F506111300435E900CD3ED6 /* Pluck Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pluck Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F506116300435E900CD3ED6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F506136300435EA00CD3ED6 /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = popup.js; path = ../../../extension/popup.js; sourceTree = "<group>"; };
-		3F506137300435EA00CD3ED6 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../../extension/background.js; sourceTree = "<group>"; };
-		3F506138300435EA00CD3ED6 /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = ../../../extension/popup.html; sourceTree = "<group>"; };
-		3F506139300435EA00CD3ED6 /* page-clipboard.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = "page-clipboard.js"; path = "../../../extension/page-clipboard.js"; sourceTree = "<group>"; };
-		3F50613A300435EA00CD3ED6 /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../../extension/icons; sourceTree = "<group>"; };
-		3F50613B300435EA00CD3ED6 /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../extension/manifest.json; sourceTree = "<group>"; };
-		3F50613C300435EA00CD3ED6 /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../../extension/content.js; sourceTree = "<group>"; };
-		3F50613D300435EA00CD3ED6 /* shared.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = shared.js; path = ../../../extension/shared.js; sourceTree = "<group>"; };
+		3FE01098300443A2003A8AAE /* Pluck Pins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pluck Pins.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FE0109B300443A2003A8AAE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3FE0109F300443A2003A8AAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		3FE010A1300443A2003A8AAE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		3FE010A3300443A2003A8AAE /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		3FE010A5300443A2003A8AAE /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		3FE010A7300443A2003A8AAE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3FE010AA300443A2003A8AAE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3FE010AC300443A3003A8AAE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3FE010AE300443A3003A8AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FE010B3300443A3003A8AAE /* Pluck Pins Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pluck Pins Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FE010B8300443A3003A8AAE /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		3FE010BA300443A3003A8AAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FE010C5300443A4003A8AAE /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = popup.js; path = ../../../extension/popup.js; sourceTree = "<group>"; };
+		3FE010C6300443A4003A8AAE /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../../extension/background.js; sourceTree = "<group>"; };
+		3FE010C7300443A4003A8AAE /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = ../../../extension/popup.html; sourceTree = "<group>"; };
+		3FE010C8300443A4003A8AAE /* page-clipboard.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = "page-clipboard.js"; path = "../../../extension/page-clipboard.js"; sourceTree = "<group>"; };
+		3FE010C9300443A4003A8AAE /* icons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = icons; path = ../../../extension/icons; sourceTree = "<group>"; };
+		3FE010CA300443A4003A8AAE /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../extension/manifest.json; sourceTree = "<group>"; };
+		3FE010CB300443A4003A8AAE /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../../extension/content.js; sourceTree = "<group>"; };
+		3FE010CC300443A4003A8AAE /* shared.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = shared.js; path = ../../../extension/shared.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3F5060E6300435E800CD3ED6 /* Frameworks */ = {
+		3FE01095300443A2003A8AAE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3F5060F8300435E800CD3ED6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F506104300435E800CD3ED6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F50610E300435E900CD3ED6 /* Frameworks */ = {
+		3FE010B0300443A3003A8AAE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -153,383 +93,227 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3F5060D5300435E100CD3ED6 = {
+		3FE0108F300443A2003A8AAE = {
 			isa = PBXGroup;
 			children = (
-				3F5060DA300435E100CD3ED6 /* Shared (App) */,
-				3F5060E3300435E800CD3ED6 /* Shared (Extension) */,
-				3F5060EB300435E800CD3ED6 /* iOS (App) */,
-				3F5060FC300435E800CD3ED6 /* macOS (App) */,
-				3F50610B300435E800CD3ED6 /* iOS (Extension) */,
-				3F506115300435E900CD3ED6 /* macOS (Extension) */,
-				3F5060EA300435E800CD3ED6 /* Products */,
+				3FE0109A300443A2003A8AAE /* Pluck Pins */,
+				3FE010B7300443A3003A8AAE /* Pluck Pins Extension */,
+				3FE01099300443A2003A8AAE /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		3F5060DA300435E100CD3ED6 /* Shared (App) */ = {
+		3FE01099300443A2003A8AAE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3F5060E1300435E100CD3ED6 /* ViewController.swift */,
-				3F5060E2300435E800CD3ED6 /* Assets.xcassets */,
-				3F5060DB300435E100CD3ED6 /* Resources */,
-			);
-			path = "Shared (App)";
-			sourceTree = "<group>";
-		};
-		3F5060DB300435E100CD3ED6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3F5060DC300435E100CD3ED6 /* Main.html */,
-				3F5060DE300435E100CD3ED6 /* Icon.png */,
-				3F5060DF300435E100CD3ED6 /* Style.css */,
-				3F5060E0300435E100CD3ED6 /* Script.js */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		3F5060E3300435E800CD3ED6 /* Shared (Extension) */ = {
-			isa = PBXGroup;
-			children = (
-				3F506135300435EA00CD3ED6 /* Resources */,
-				3F5060E4300435E800CD3ED6 /* SafariWebExtensionHandler.swift */,
-			);
-			path = "Shared (Extension)";
-			sourceTree = "<group>";
-		};
-		3F5060EA300435E800CD3ED6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3F5060E9300435E800CD3ED6 /* Pluck Pins.app */,
-				3F5060FB300435E800CD3ED6 /* Pluck Pins.app */,
-				3F506107300435E800CD3ED6 /* Pluck Extension.appex */,
-				3F506111300435E900CD3ED6 /* Pluck Extension.appex */,
+				3FE01098300443A2003A8AAE /* Pluck Pins.app */,
+				3FE010B3300443A3003A8AAE /* Pluck Pins Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3F5060EB300435E800CD3ED6 /* iOS (App) */ = {
+		3FE0109A300443A2003A8AAE /* Pluck Pins */ = {
 			isa = PBXGroup;
 			children = (
-				3F5060EC300435E800CD3ED6 /* AppDelegate.swift */,
-				3F5060EE300435E800CD3ED6 /* SceneDelegate.swift */,
-				3F5060F0300435E800CD3ED6 /* LaunchScreen.storyboard */,
-				3F5060F3300435E800CD3ED6 /* Main.storyboard */,
-				3F5060F6300435E800CD3ED6 /* Info.plist */,
+				3FE0109B300443A2003A8AAE /* AppDelegate.swift */,
+				3FE010A7300443A2003A8AAE /* ViewController.swift */,
+				3FE010A9300443A2003A8AAE /* Main.storyboard */,
+				3FE010AC300443A3003A8AAE /* Assets.xcassets */,
+				3FE010AE300443A3003A8AAE /* Info.plist */,
+				3FE0109D300443A2003A8AAE /* Resources */,
 			);
-			path = "iOS (App)";
+			path = "Pluck Pins";
 			sourceTree = "<group>";
 		};
-		3F5060FC300435E800CD3ED6 /* macOS (App) */ = {
+		3FE0109D300443A2003A8AAE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3F5060FD300435E800CD3ED6 /* AppDelegate.swift */,
-				3F5060FF300435E800CD3ED6 /* Main.storyboard */,
-				3F506102300435E800CD3ED6 /* Info.plist */,
+				3FE0109E300443A2003A8AAE /* Main.html */,
+				3FE010A1300443A2003A8AAE /* Icon.png */,
+				3FE010A3300443A2003A8AAE /* Style.css */,
+				3FE010A5300443A2003A8AAE /* Script.js */,
 			);
-			path = "macOS (App)";
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		3F50610B300435E800CD3ED6 /* iOS (Extension) */ = {
+		3FE010B7300443A3003A8AAE /* Pluck Pins Extension */ = {
 			isa = PBXGroup;
 			children = (
-				3F50610C300435E800CD3ED6 /* Info.plist */,
+				3FE010C4300443A4003A8AAE /* Resources */,
+				3FE010B8300443A3003A8AAE /* SafariWebExtensionHandler.swift */,
+				3FE010BA300443A3003A8AAE /* Info.plist */,
 			);
-			path = "iOS (Extension)";
+			path = "Pluck Pins Extension";
 			sourceTree = "<group>";
 		};
-		3F506115300435E900CD3ED6 /* macOS (Extension) */ = {
+		3FE010C4300443A4003A8AAE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3F506116300435E900CD3ED6 /* Info.plist */,
-			);
-			path = "macOS (Extension)";
-			sourceTree = "<group>";
-		};
-		3F506135300435EA00CD3ED6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				3F506136300435EA00CD3ED6 /* popup.js */,
-				3F506137300435EA00CD3ED6 /* background.js */,
-				3F506138300435EA00CD3ED6 /* popup.html */,
-				3F506139300435EA00CD3ED6 /* page-clipboard.js */,
-				3F50613A300435EA00CD3ED6 /* icons */,
-				3F50613B300435EA00CD3ED6 /* manifest.json */,
-				3F50613C300435EA00CD3ED6 /* content.js */,
-				3F50613D300435EA00CD3ED6 /* shared.js */,
+				3FE010C5300443A4003A8AAE /* popup.js */,
+				3FE010C6300443A4003A8AAE /* background.js */,
+				3FE010C7300443A4003A8AAE /* popup.html */,
+				3FE010C8300443A4003A8AAE /* page-clipboard.js */,
+				3FE010C9300443A4003A8AAE /* icons */,
+				3FE010CA300443A4003A8AAE /* manifest.json */,
+				3FE010CB300443A4003A8AAE /* content.js */,
+				3FE010CC300443A4003A8AAE /* shared.js */,
 			);
 			name = Resources;
-			path = "Shared (Extension)";
+			path = "Pluck Pins Extension";
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3F5060E8300435E800CD3ED6 /* Pluck (iOS) */ = {
+		3FE01097300443A2003A8AAE /* Pluck Pins */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3F50612B300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck (iOS)" */;
+			buildConfigurationList = 3FE010C1300443A3003A8AAE /* Build configuration list for PBXNativeTarget "Pluck Pins" */;
 			buildPhases = (
-				3F5060E5300435E800CD3ED6 /* Sources */,
-				3F5060E6300435E800CD3ED6 /* Frameworks */,
-				3F5060E7300435E800CD3ED6 /* Resources */,
-				3F50612A300435E900CD3ED6 /* Embed Foundation Extensions */,
+				3FE01094300443A2003A8AAE /* Sources */,
+				3FE01095300443A2003A8AAE /* Frameworks */,
+				3FE01096300443A2003A8AAE /* Resources */,
+				3FE010C0300443A3003A8AAE /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3F50610A300435E800CD3ED6 /* PBXTargetDependency */,
+				3FE010B6300443A3003A8AAE /* PBXTargetDependency */,
 			);
-			name = "Pluck (iOS)";
+			name = "Pluck Pins";
 			packageProductDependencies = (
 			);
-			productName = "Pluck (iOS)";
-			productReference = 3F5060E9300435E800CD3ED6 /* Pluck Pins.app */;
+			productName = "Pluck Pins";
+			productReference = 3FE01098300443A2003A8AAE /* Pluck Pins.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3F5060FA300435E800CD3ED6 /* Pluck (macOS) */ = {
+		3FE010B2300443A3003A8AAE /* Pluck Pins Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3F506132300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck (macOS)" */;
+			buildConfigurationList = 3FE010BD300443A3003A8AAE /* Build configuration list for PBXNativeTarget "Pluck Pins Extension" */;
 			buildPhases = (
-				3F5060F7300435E800CD3ED6 /* Sources */,
-				3F5060F8300435E800CD3ED6 /* Frameworks */,
-				3F5060F9300435E800CD3ED6 /* Resources */,
-				3F506131300435E900CD3ED6 /* Embed Foundation Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3F506114300435E900CD3ED6 /* PBXTargetDependency */,
-			);
-			name = "Pluck (macOS)";
-			packageProductDependencies = (
-			);
-			productName = "Pluck (macOS)";
-			productReference = 3F5060FB300435E800CD3ED6 /* Pluck Pins.app */;
-			productType = "com.apple.product-type.application";
-		};
-		3F506106300435E800CD3ED6 /* Pluck Extension (iOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3F506127300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck Extension (iOS)" */;
-			buildPhases = (
-				3F506103300435E800CD3ED6 /* Sources */,
-				3F506104300435E800CD3ED6 /* Frameworks */,
-				3F506105300435E800CD3ED6 /* Resources */,
+				3FE010AF300443A3003A8AAE /* Sources */,
+				3FE010B0300443A3003A8AAE /* Frameworks */,
+				3FE010B1300443A3003A8AAE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pluck Extension (iOS)";
+			name = "Pluck Pins Extension";
 			packageProductDependencies = (
 			);
-			productName = "Pluck Extension (iOS)";
-			productReference = 3F506107300435E800CD3ED6 /* Pluck Extension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
-		3F506110300435E900CD3ED6 /* Pluck Extension (macOS) */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3F50612E300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck Extension (macOS)" */;
-			buildPhases = (
-				3F50610D300435E900CD3ED6 /* Sources */,
-				3F50610E300435E900CD3ED6 /* Frameworks */,
-				3F50610F300435E900CD3ED6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pluck Extension (macOS)";
-			packageProductDependencies = (
-			);
-			productName = "Pluck Extension (macOS)";
-			productReference = 3F506111300435E900CD3ED6 /* Pluck Extension.appex */;
+			productName = "Pluck Pins Extension";
+			productReference = 3FE010B3300443A3003A8AAE /* Pluck Pins Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3F5060D6300435E100CD3ED6 /* Project object */ = {
+		3FE01090300443A2003A8AAE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2630;
 				TargetAttributes = {
-					3F5060E8300435E800CD3ED6 = {
+					3FE01097300443A2003A8AAE = {
 						CreatedOnToolsVersion = 26.3;
 					};
-					3F5060FA300435E800CD3ED6 = {
-						CreatedOnToolsVersion = 26.3;
-					};
-					3F506106300435E800CD3ED6 = {
-						CreatedOnToolsVersion = 26.3;
-					};
-					3F506110300435E900CD3ED6 = {
+					3FE010B2300443A3003A8AAE = {
 						CreatedOnToolsVersion = 26.3;
 					};
 				};
 			};
-			buildConfigurationList = 3F5060D9300435E100CD3ED6 /* Build configuration list for PBXProject "Pluck" */;
+			buildConfigurationList = 3FE01093300443A2003A8AAE /* Build configuration list for PBXProject "Pluck Pins" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 3F5060D5300435E100CD3ED6;
+			mainGroup = 3FE0108F300443A2003A8AAE;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 3F5060EA300435E800CD3ED6 /* Products */;
+			productRefGroup = 3FE01099300443A2003A8AAE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3F5060E8300435E800CD3ED6 /* Pluck (iOS) */,
-				3F5060FA300435E800CD3ED6 /* Pluck (macOS) */,
-				3F506106300435E800CD3ED6 /* Pluck Extension (iOS) */,
-				3F506110300435E900CD3ED6 /* Pluck Extension (macOS) */,
+				3FE01097300443A2003A8AAE /* Pluck Pins */,
+				3FE010B2300443A3003A8AAE /* Pluck Pins Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3F5060E7300435E800CD3ED6 /* Resources */ = {
+		3FE01096300443A2003A8AAE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F506119300435E900CD3ED6 /* Icon.png in Resources */,
-				3F5060F2300435E800CD3ED6 /* LaunchScreen.storyboard in Resources */,
-				3F506117300435E900CD3ED6 /* Main.html in Resources */,
-				3F50611D300435E900CD3ED6 /* Script.js in Resources */,
-				3F506121300435E900CD3ED6 /* Assets.xcassets in Resources */,
-				3F5060F5300435E800CD3ED6 /* Main.storyboard in Resources */,
-				3F50611B300435E900CD3ED6 /* Style.css in Resources */,
+				3FE010A2300443A2003A8AAE /* Icon.png in Resources */,
+				3FE010AB300443A2003A8AAE /* Main.storyboard in Resources */,
+				3FE010A6300443A2003A8AAE /* Script.js in Resources */,
+				3FE010A0300443A2003A8AAE /* Main.html in Resources */,
+				3FE010AD300443A3003A8AAE /* Assets.xcassets in Resources */,
+				3FE010A4300443A2003A8AAE /* Style.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3F5060F9300435E800CD3ED6 /* Resources */ = {
+		3FE010B1300443A3003A8AAE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F50611A300435E900CD3ED6 /* Icon.png in Resources */,
-				3F50611C300435E900CD3ED6 /* Style.css in Resources */,
-				3F506101300435E800CD3ED6 /* Main.storyboard in Resources */,
-				3F50611E300435E900CD3ED6 /* Script.js in Resources */,
-				3F506122300435E900CD3ED6 /* Assets.xcassets in Resources */,
-				3F506118300435E900CD3ED6 /* Main.html in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F506105300435E800CD3ED6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F506147300435EA00CD3ED6 /* background.js in Resources */,
-				3F506148300435EA00CD3ED6 /* popup.html in Resources */,
-				3F506149300435EA00CD3ED6 /* page-clipboard.js in Resources */,
-				3F50614D300435EA00CD3ED6 /* shared.js in Resources */,
-				3F50614A300435EA00CD3ED6 /* icons in Resources */,
-				3F50614B300435EA00CD3ED6 /* manifest.json in Resources */,
-				3F50614C300435EA00CD3ED6 /* content.js in Resources */,
-				3F506146300435EA00CD3ED6 /* popup.js in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F50610F300435E900CD3ED6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F50613F300435EA00CD3ED6 /* background.js in Resources */,
-				3F506140300435EA00CD3ED6 /* popup.html in Resources */,
-				3F506141300435EA00CD3ED6 /* page-clipboard.js in Resources */,
-				3F506145300435EA00CD3ED6 /* shared.js in Resources */,
-				3F506142300435EA00CD3ED6 /* icons in Resources */,
-				3F506143300435EA00CD3ED6 /* manifest.json in Resources */,
-				3F506144300435EA00CD3ED6 /* content.js in Resources */,
-				3F50613E300435EA00CD3ED6 /* popup.js in Resources */,
+				3FE010CE300443A4003A8AAE /* background.js in Resources */,
+				3FE010CF300443A4003A8AAE /* popup.html in Resources */,
+				3FE010D0300443A4003A8AAE /* page-clipboard.js in Resources */,
+				3FE010D4300443A4003A8AAE /* shared.js in Resources */,
+				3FE010D1300443A4003A8AAE /* icons in Resources */,
+				3FE010D2300443A4003A8AAE /* manifest.json in Resources */,
+				3FE010D3300443A4003A8AAE /* content.js in Resources */,
+				3FE010CD300443A4003A8AAE /* popup.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3F5060E5300435E800CD3ED6 /* Sources */ = {
+		3FE01094300443A2003A8AAE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F50611F300435E900CD3ED6 /* ViewController.swift in Sources */,
-				3F5060ED300435E800CD3ED6 /* AppDelegate.swift in Sources */,
-				3F5060EF300435E800CD3ED6 /* SceneDelegate.swift in Sources */,
+				3FE010A8300443A2003A8AAE /* ViewController.swift in Sources */,
+				3FE0109C300443A2003A8AAE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3F5060F7300435E800CD3ED6 /* Sources */ = {
+		3FE010AF300443A3003A8AAE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F506120300435E900CD3ED6 /* ViewController.swift in Sources */,
-				3F5060FE300435E800CD3ED6 /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F506103300435E800CD3ED6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F506123300435E900CD3ED6 /* SafariWebExtensionHandler.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3F50610D300435E900CD3ED6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3F506124300435E900CD3ED6 /* SafariWebExtensionHandler.swift in Sources */,
+				3FE010B9300443A3003A8AAE /* SafariWebExtensionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3F50610A300435E800CD3ED6 /* PBXTargetDependency */ = {
+		3FE010B6300443A3003A8AAE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3F506106300435E800CD3ED6 /* Pluck Extension (iOS) */;
-			targetProxy = 3F506109300435E800CD3ED6 /* PBXContainerItemProxy */;
-		};
-		3F506114300435E900CD3ED6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3F506110300435E900CD3ED6 /* Pluck Extension (macOS) */;
-			targetProxy = 3F506113300435E900CD3ED6 /* PBXContainerItemProxy */;
+			target = 3FE010B2300443A3003A8AAE /* Pluck Pins Extension */;
+			targetProxy = 3FE010B5300443A3003A8AAE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3F5060DC300435E100CD3ED6 /* Main.html */ = {
+		3FE0109E300443A2003A8AAE /* Main.html */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3F5060DD300435E100CD3ED6 /* Base */,
+				3FE0109F300443A2003A8AAE /* Base */,
 			);
 			name = Main.html;
 			sourceTree = "<group>";
 		};
-		3F5060F0300435E800CD3ED6 /* LaunchScreen.storyboard */ = {
+		3FE010A9300443A2003A8AAE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3F5060F1300435E800CD3ED6 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		3F5060F3300435E800CD3ED6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F5060F4300435E800CD3ED6 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3F5060FF300435E800CD3ED6 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3F506100300435E800CD3ED6 /* Base */,
+				3FE010AA300443A2003A8AAE /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -537,7 +321,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3F506125300435E900CD3ED6 /* Debug */ = {
+		3FE010BB300443A3003A8AAE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -590,15 +374,17 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		3F506126300435E900CD3ED6 /* Release */ = {
+		3FE010BC300443A3003A8AAE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -645,161 +431,15 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
 		};
-		3F506128300435E900CD3ED6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Extension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					SafariServices,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck.Extension;
-				PRODUCT_NAME = "Pluck Extension";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3F506129300435E900CD3ED6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Extension";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					SafariServices,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck.Extension;
-				PRODUCT_NAME = "Pluck Extension";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		3F50612C300435E900CD3ED6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Pins";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					SafariServices,
-					"-framework",
-					WebKit,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck;
-				PRODUCT_NAME = "Pluck Pins";
-				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3F50612D300435E900CD3ED6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Pins";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = (
-					"-framework",
-					SafariServices,
-					"-framework",
-					WebKit,
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck;
-				PRODUCT_NAME = "Pluck Pins";
-				SDKROOT = iphoneos;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		3F50612F300435E900CD3ED6 /* Debug */ = {
+		3FE010BE300443A3003A8AAE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -808,8 +448,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Extension";
+				INFOPLIST_FILE = "Pluck Pins Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Pins Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -823,8 +463,7 @@
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck.Extension;
-				PRODUCT_NAME = "Pluck Extension";
-				SDKROOT = macosx;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -834,7 +473,7 @@
 			};
 			name = Debug;
 		};
-		3F506130300435E900CD3ED6 /* Release */ = {
+		3FE010BF300443A3003A8AAE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -843,8 +482,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Extension";
+				INFOPLIST_FILE = "Pluck Pins Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Pins Extension";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -858,8 +497,7 @@
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck.Extension;
-				PRODUCT_NAME = "Pluck Extension";
-				SDKROOT = macosx;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -869,27 +507,28 @@
 			};
 			name = Release;
 		};
-		3F506133300435E900CD3ED6 /* Debug */ = {
+		3FE010C2300443A3003A8AAE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_FILE = "Pluck Pins/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Pins";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -898,9 +537,8 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck;
-				PRODUCT_NAME = "Pluck Pins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
-				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -910,27 +548,28 @@
 			};
 			name = Debug;
 		};
-		3F506134300435E900CD3ED6 /* Release */ = {
+		3FE010C3300443A3003A8AAE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "macOS (App)/Info.plist";
+				INFOPLIST_FILE = "Pluck Pins/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Pluck Pins";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -939,9 +578,8 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bbrizly.pluck;
-				PRODUCT_NAME = "Pluck Pins";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
-				SDKROOT = macosx;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -954,52 +592,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F5060D9300435E100CD3ED6 /* Build configuration list for PBXProject "Pluck" */ = {
+		3FE01093300443A2003A8AAE /* Build configuration list for PBXProject "Pluck Pins" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F506125300435E900CD3ED6 /* Debug */,
-				3F506126300435E900CD3ED6 /* Release */,
+				3FE010BB300443A3003A8AAE /* Debug */,
+				3FE010BC300443A3003A8AAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3F506127300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck Extension (iOS)" */ = {
+		3FE010BD300443A3003A8AAE /* Build configuration list for PBXNativeTarget "Pluck Pins Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F506128300435E900CD3ED6 /* Debug */,
-				3F506129300435E900CD3ED6 /* Release */,
+				3FE010BE300443A3003A8AAE /* Debug */,
+				3FE010BF300443A3003A8AAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3F50612B300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck (iOS)" */ = {
+		3FE010C1300443A3003A8AAE /* Build configuration list for PBXNativeTarget "Pluck Pins" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3F50612C300435E900CD3ED6 /* Debug */,
-				3F50612D300435E900CD3ED6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3F50612E300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck Extension (macOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3F50612F300435E900CD3ED6 /* Debug */,
-				3F506130300435E900CD3ED6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3F506132300435E900CD3ED6 /* Build configuration list for PBXNativeTarget "Pluck (macOS)" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3F506133300435E900CD3ED6 /* Debug */,
-				3F506134300435E900CD3ED6 /* Release */,
+				3FE010C2300443A3003A8AAE /* Debug */,
+				3FE010C3300443A3003A8AAE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3F5060D6300435E100CD3ED6 /* Project object */;
+	rootObject = 3FE01090300443A2003A8AAE /* Project object */;
 }
