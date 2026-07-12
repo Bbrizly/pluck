@@ -26,6 +26,22 @@ Use only the sizes required by each browser and store in the final manifest/pack
 
 ## Listing screenshots
 
+Mac App Store screenshots are in:
+
+```text
+store-assets/screenshots/macos/
+```
+
+Current set:
+
+```text
+01-copy-button.png
+02-copied-state.png
+03-pasted-result.png
+```
+
+All are 1280×800 PNGs, accepted by Mac App Store Connect.
+
 Capture real product behavior:
 
 1. Pinterest feed before hover.
