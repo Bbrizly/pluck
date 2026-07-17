@@ -25,7 +25,7 @@ Copy a Pinterest feed image straight to your clipboard without ever opening the 
 
 > **v0.8.0** · Safari on macOS is the proven target. The same source also builds Chromium and Firefox packages; those still need live browser testing before I would call them supported.
 
-- **Approved:** firefox | **Status:** Awaiting approval for google, edge.
+- **Approved:** firefox, edge | **Status:** Awaiting approval for google.
 
 ## Before and after
 
@@ -41,7 +41,7 @@ With Pluck      Feed ──▶ Hover image ──▶ Copy ──▶ Paste ✓
 | Browser | Package | Store | Load it |
 |---|---|---|---|
 | Chrome, Brave, Opera | `pluck-chromium-<version>.zip` | [Chrome Store](https://chromewebstore.google.com/detail/pluck/elfpnbkmeejlmmigamabibgofdkoadml) | Unzip, open `chrome://extensions`, enable **Developer mode**, choose **Load unpacked**, select the unzipped folder |
-| Edge | `pluck-chromium-<version>.zip` | Awaiting | Same as Chrome, via `edge://extensions` |
+| Edge | `pluck-chromium-<version>.zip` | [Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/pluck/pgjackkhohlodkcjmmjhjepnifbbcmok) | Unzip, open `edge://extensions`, enable **Developer mode**, choose **Load unpacked** |
 | Firefox | `pluck-firefox-<version>.zip` | [Mozilla Addon store](https://addons.mozilla.org/en-CA/firefox/addon/pinpluck/) | Unzip, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, select `manifest.json` (temporary until the AMO listing is live) |
 | Safari | `pluck-safari-<version>.zip` | Awaiting | Unzip, then follow [`docs/SAFARI_INSTALLATION.md`](docs/SAFARI_INSTALLATION.md), which needs Xcode |
 
