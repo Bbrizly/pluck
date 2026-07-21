@@ -2,6 +2,17 @@
 
 All notable changes are documented here.
 
+## 0.8.3
+
+### Icon
+
+- New icon: a white feather inside capture brackets on a purple circle. The old one borrowed Pinterest's mark, which is not ours to use. Apple rejected the Mac App Store build over it (guideline 4.1(b)).
+- Icon source is `store-assets/icon-master.png`. Every size is generated from it, so edit that one file and regenerate.
+
+### Colour
+
+- The Copy button, the popup toggles, and the website now use the icon's purple instead of Pinterest's red. The button no longer looks like Pinterest's own Save button sitting next to it.
+
 ## 0.8.2
 
 ### Copy button

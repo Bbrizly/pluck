@@ -293,7 +293,7 @@
           padding: 0 12px;
           border-radius: 9px;
           border: none;
-          background: #e60023;
+          background: #6649ED;
           color: #fff;
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
           contain: layout style paint;
@@ -306,7 +306,7 @@
           user-select: none;
           transition: opacity 140ms ease, transform 140ms ease, background 140ms ease;
         }
-        button:hover { background: #ad081b; }
+        button:hover { background: #5039B9; }
         button:active { transform: scale(0.97); }
         button:focus-visible { outline: 3px solid rgba(255, 255, 255, 0.92); outline-offset: 2px; }
         button[disabled] { cursor: default; opacity: 0.92; }
